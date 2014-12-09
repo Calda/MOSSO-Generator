@@ -12,6 +12,8 @@
 		441E69471A372E290004F0CA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 441E69461A372E290004F0CA /* Images.xcassets */; };
 		441E694A1A372E290004F0CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 441E69481A372E290004F0CA /* Main.storyboard */; };
 		441E69561A372E290004F0CA /* MOSSOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E69551A372E290004F0CA /* MOSSOTests.swift */; };
+		44741C3F1A3735E50097DBFD /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44741C3E1A3735E50097DBFD /* AVKit.framework */; };
+		44741C411A3738040097DBFD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44741C401A3738030097DBFD /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,8 @@
 		441E694F1A372E290004F0CA /* MOSSOTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MOSSOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		441E69541A372E290004F0CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		441E69551A372E290004F0CA /* MOSSOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MOSSOTests.swift; sourceTree = "<group>"; };
+		44741C3E1A3735E50097DBFD /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		44741C401A3738030097DBFD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +45,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44741C411A3738040097DBFD /* AVFoundation.framework in Frameworks */,
+				44741C3F1A3735E50097DBFD /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +63,8 @@
 		441E69341A372E280004F0CA = {
 			isa = PBXGroup;
 			children = (
+				44741C401A3738030097DBFD /* AVFoundation.framework */,
+				44741C3E1A3735E50097DBFD /* AVKit.framework */,
 				441E693F1A372E290004F0CA /* MOSSO */,
 				441E69521A372E290004F0CA /* MOSSOTests */,
 				441E693E1A372E290004F0CA /* Products */,
@@ -397,6 +405,7 @@
 				441E695B1A372E290004F0CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		441E695C1A372E290004F0CA /* Build configuration list for PBXNativeTarget "MOSSOTests" */ = {
 			isa = XCConfigurationList;
@@ -405,6 +414,7 @@
 				441E695E1A372E290004F0CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
