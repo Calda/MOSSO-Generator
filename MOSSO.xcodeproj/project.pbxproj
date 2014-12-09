@@ -1,0 +1,412 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		441E69431A372E290004F0CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E69421A372E290004F0CA /* AppDelegate.swift */; };
+		441E69451A372E290004F0CA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E69441A372E290004F0CA /* ViewController.swift */; };
+		441E69471A372E290004F0CA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 441E69461A372E290004F0CA /* Images.xcassets */; };
+		441E694A1A372E290004F0CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 441E69481A372E290004F0CA /* Main.storyboard */; };
+		441E69561A372E290004F0CA /* MOSSOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E69551A372E290004F0CA /* MOSSOTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		441E69501A372E290004F0CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 441E69351A372E280004F0CA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 441E693C1A372E290004F0CA;
+			remoteInfo = MOSSO;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		441E693D1A372E290004F0CA /* MOSSO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MOSSO.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		441E69411A372E290004F0CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		441E69421A372E290004F0CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		441E69441A372E290004F0CA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		441E69461A372E290004F0CA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		441E69491A372E290004F0CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		441E694F1A372E290004F0CA /* MOSSOTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MOSSOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		441E69541A372E290004F0CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		441E69551A372E290004F0CA /* MOSSOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MOSSOTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		441E693A1A372E290004F0CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		441E694C1A372E290004F0CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		441E69341A372E280004F0CA = {
+			isa = PBXGroup;
+			children = (
+				441E693F1A372E290004F0CA /* MOSSO */,
+				441E69521A372E290004F0CA /* MOSSOTests */,
+				441E693E1A372E290004F0CA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		441E693E1A372E290004F0CA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				441E693D1A372E290004F0CA /* MOSSO.app */,
+				441E694F1A372E290004F0CA /* MOSSOTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		441E693F1A372E290004F0CA /* MOSSO */ = {
+			isa = PBXGroup;
+			children = (
+				441E69421A372E290004F0CA /* AppDelegate.swift */,
+				441E69441A372E290004F0CA /* ViewController.swift */,
+				441E69461A372E290004F0CA /* Images.xcassets */,
+				441E69481A372E290004F0CA /* Main.storyboard */,
+				441E69401A372E290004F0CA /* Supporting Files */,
+			);
+			path = MOSSO;
+			sourceTree = "<group>";
+		};
+		441E69401A372E290004F0CA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				441E69411A372E290004F0CA /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		441E69521A372E290004F0CA /* MOSSOTests */ = {
+			isa = PBXGroup;
+			children = (
+				441E69551A372E290004F0CA /* MOSSOTests.swift */,
+				441E69531A372E290004F0CA /* Supporting Files */,
+			);
+			path = MOSSOTests;
+			sourceTree = "<group>";
+		};
+		441E69531A372E290004F0CA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				441E69541A372E290004F0CA /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		441E693C1A372E290004F0CA /* MOSSO */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 441E69591A372E290004F0CA /* Build configuration list for PBXNativeTarget "MOSSO" */;
+			buildPhases = (
+				441E69391A372E290004F0CA /* Sources */,
+				441E693A1A372E290004F0CA /* Frameworks */,
+				441E693B1A372E290004F0CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MOSSO;
+			productName = MOSSO;
+			productReference = 441E693D1A372E290004F0CA /* MOSSO.app */;
+			productType = "com.apple.product-type.application";
+		};
+		441E694E1A372E290004F0CA /* MOSSOTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 441E695C1A372E290004F0CA /* Build configuration list for PBXNativeTarget "MOSSOTests" */;
+			buildPhases = (
+				441E694B1A372E290004F0CA /* Sources */,
+				441E694C1A372E290004F0CA /* Frameworks */,
+				441E694D1A372E290004F0CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				441E69511A372E290004F0CA /* PBXTargetDependency */,
+			);
+			name = MOSSOTests;
+			productName = MOSSOTests;
+			productReference = 441E694F1A372E290004F0CA /* MOSSOTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		441E69351A372E280004F0CA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Dog Pound Productions";
+				TargetAttributes = {
+					441E693C1A372E290004F0CA = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					441E694E1A372E290004F0CA = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 441E693C1A372E290004F0CA;
+					};
+				};
+			};
+			buildConfigurationList = 441E69381A372E290004F0CA /* Build configuration list for PBXProject "MOSSO" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 441E69341A372E280004F0CA;
+			productRefGroup = 441E693E1A372E290004F0CA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				441E693C1A372E290004F0CA /* MOSSO */,
+				441E694E1A372E290004F0CA /* MOSSOTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		441E693B1A372E290004F0CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				441E69471A372E290004F0CA /* Images.xcassets in Resources */,
+				441E694A1A372E290004F0CA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		441E694D1A372E290004F0CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		441E69391A372E290004F0CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				441E69451A372E290004F0CA /* ViewController.swift in Sources */,
+				441E69431A372E290004F0CA /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		441E694B1A372E290004F0CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				441E69561A372E290004F0CA /* MOSSOTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		441E69511A372E290004F0CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 441E693C1A372E290004F0CA /* MOSSO */;
+			targetProxy = 441E69501A372E290004F0CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		441E69481A372E290004F0CA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				441E69491A372E290004F0CA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		441E69571A372E290004F0CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		441E69581A372E290004F0CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		441E695A1A372E290004F0CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MOSSO/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		441E695B1A372E290004F0CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MOSSO/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		441E695D1A372E290004F0CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MOSSOTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MOSSO.app/Contents/MacOS/MOSSO";
+			};
+			name = Debug;
+		};
+		441E695E1A372E290004F0CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MOSSOTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MOSSO.app/Contents/MacOS/MOSSO";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		441E69381A372E290004F0CA /* Build configuration list for PBXProject "MOSSO" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				441E69571A372E290004F0CA /* Debug */,
+				441E69581A372E290004F0CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		441E69591A372E290004F0CA /* Build configuration list for PBXNativeTarget "MOSSO" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				441E695A1A372E290004F0CA /* Debug */,
+				441E695B1A372E290004F0CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		441E695C1A372E290004F0CA /* Build configuration list for PBXNativeTarget "MOSSOTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				441E695D1A372E290004F0CA /* Debug */,
+				441E695E1A372E290004F0CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 441E69351A372E280004F0CA /* Project object */;
+}
