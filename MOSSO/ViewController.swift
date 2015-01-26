@@ -9,13 +9,28 @@
 import Cocoa
 import AVKit
 import AVFoundation
+import AppKit
+import QuartzCore
 
 class ViewController: NSViewController {
 
-    @IBOutlet weak var playerView: AVPlayerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let screens = NSScreen.screens()!
+        var smallScreen: NSScreen = screens[0] as NSScreen
+        for anyScreen in screens {
+            let screen = anyScreen as NSScreen
+            if smallScreen.frame.width > screen.frame.width {
+                smallScreen = screen
+            }
+        }
+        let aspectRatio = smallScreen.frame.width / smallScreen.frame.height
+        if aspectRatio == (16/9) { //smallest monitor was main iMac monitor
+            error("External monitor not found.")
+            return
+        }
         
         var clips : [String] = []
         
@@ -24,33 +39,35 @@ class ViewController: NSViewController {
         let fileManager = NSFileManager.defaultManager()
         if let enumerator = fileManager.enumeratorAtPath(path) {
             while let file = enumerator.nextObject() as? String {
-                clips.append(path + "/" + file)
+                if file.hasSuffix(".mov") {
+                    clips.append(path + "/" + file)
+                }
             }
         } else {
             println("Folder not found.")
         }
         
         if clips.count > 0 {
-            playVideoQueue(clips)
+            NSThread.sleepForTimeInterval(NSTimeInterval(5.0))
+            
+            var clipQueue : [String] = []
+            while clips.count > 0 {
+                let clipIndex = Int(random(min: 0, max: CGFloat(clips.count - 1)))
+                clipQueue.append(clips[clipIndex])
+                clips.removeAtIndex(clipIndex)
+            }
+            
         }
-        
-        // Do any additional setup after loading the view.
+
     }
     
-    func playVideoQueue(paths : [String]){
-        println(paths[0])
-        dispatch_async(dispatch_get_main_queue(), {
-            self.playerView.player = AVPlayer(URL: NSURL(fileURLWithPath: paths[0]))
-            self.playerView.player!.play()
-        })
+    func error(error : String){
+        println("CRITIAL ERROR:::\(error)")
     }
 
-    override var representedObject: AnyObject? {
-        didSet {
-        // Update the view, if already loaded.
-        }
+    func random(#min: CGFloat, max: CGFloat) -> CGFloat {
+        return CGFloat(Float(arc4random()) / 0xFFFFFFFF) * (max - min) + min
     }
-
 
 }
 
