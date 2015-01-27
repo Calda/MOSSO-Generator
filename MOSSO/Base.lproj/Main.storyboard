@@ -672,13 +672,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="241" height="101"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TSf-vT-whg">
-                                <rect key="frame" x="73" y="40" width="97" height="32"/>
-                                <buttonCell key="cell" type="push" title="Generate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="K6q-h4-BSm">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
                             <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lzD-0p-HwB">
                                 <rect key="frame" x="-2" y="78" width="245" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Ready to Generate" id="awQ-mq-X7C">
@@ -692,12 +685,22 @@
                                 <pathCell key="cell" selectable="YES" editable="YES" alignment="left" id="Zqi-nL-ntw">
                                     <font key="font" metaFont="system"/>
                                     <url key="url" string="file:///Users/dfafilm9/Desktop/"/>
-                                    <color key="backgroundColor" red="0.8980392157" green="0.92549019610000005" blue="0.97254901959999995" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="backgroundColor" red="0.89803921568627454" green="0.92549019607843142" blue="0.97254901960784312" alpha="1" colorSpace="deviceRGB"/>
                                 </pathCell>
                             </pathControl>
                             <progressIndicator wantsLayer="YES" fixedFrame="YES" maxValue="100" doubleValue="50" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="6Ce-Oz-XMV">
                                 <rect key="frame" x="9" y="23" width="223" height="20"/>
                             </progressIndicator>
+                            <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TSf-vT-whg">
+                                <rect key="frame" x="72" y="42" width="97" height="32"/>
+                                <buttonCell key="cell" type="push" title="Generate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="K6q-h4-BSm">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="generateVideo:" target="XfG-lQ-9wD" id="n4T-RY-4pK"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                 </viewController>
