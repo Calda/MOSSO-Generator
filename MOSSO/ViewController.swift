@@ -22,6 +22,63 @@ class ViewController: NSViewController {
     }
     
     @IBAction func generateVideo(sender: NSButton) {
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .AllDomainsMask, true) as? [String]
+        let rootPath = dirs![0].stringByAppendingPathComponent("/MH Instruction/Moment of Silence")
+        
+        let path1 = "\(rootPath)/intro.mov"
+        let path2 = "\(rootPath)/chair.mov"
+        
+        let asset1 = AVAsset.assetWithURL(NSURL(fileURLWithPath: path1)) as AVAsset
+        let asset2 = AVAsset.assetWithURL(NSURL(fileURLWithPath: path2)) as AVAsset
+        
+        let mixComposition = AVMutableComposition()
+        
+        let firstTrack = mixComposition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: 1)
+        let secondTrack = mixComposition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: 2)
+        
+        let clip1Start = kCMTimeZero
+        let clip2Start = CMTimeSubtract(asset1.duration, CMTimeMake(1,1))
+        
+        let mainInstruction = AVMutableVideoCompositionInstruction()
+        mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeAdd(asset1.duration, asset2.duration))
+        
+        let firstLayerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: firstTrack)
+        firstLayerInstruction.setOpacityRampFromStartOpacity(0, toEndOpacity: 1, timeRange: CMTimeRangeMake(clip1Start, CMTimeMake(1,1)))
+        firstLayerInstruction.setOpacityRampFromStartOpacity(1, toEndOpacity: 0, timeRange: CMTimeRangeMake(clip2Start, CMTimeMake(1,1)))
+        
+        let secondLayerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: secondTrack)
+        //secondLayerInstruction.setOpacityRampFromStartOpacity(0, toEndOpacity: 1, timeRange: CMTimeRangeMake(clip2Start, asset1.duration))
+        secondLayerInstruction.setOpacityRampFromStartOpacity(1, toEndOpacity: 0, timeRange: CMTimeRangeMake(CMTimeSubtract(CMTimeAdd(clip2Start, asset2.duration), CMTimeMake(1,1)), CMTimeMake(1,1)))
+        
+        mainInstruction.layerInstructions = [firstLayerInstruction, secondLayerInstruction]
+        
+        let mainCompositionInst = AVMutableVideoComposition(propertiesOfAsset: mixComposition)
+        mainCompositionInst.instructions = [mainInstruction]
+        mainCompositionInst.frameDuration = CMTimeMake(1, 30)
+        mainCompositionInst.renderSize = CGSizeMake(640, 480)
+        
+        let firstTimeRange = CMTimeRangeMake(kCMTimeZero, asset1.duration)
+        firstTrack.insertTimeRange(firstTimeRange, ofTrack: asset1.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack, atTime: kCMTimeZero, error: nil)
+        
+        let secondTimeRange = CMTimeRangeMake(kCMTimeZero, asset2.duration)
+        secondTrack.insertTimeRange(secondTimeRange, ofTrack: asset2.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack, atTime: clip2Start, error: nil)
+        
+        let desktopPath = NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)[0] as NSString
+        let exportURL = NSURL.fileURLWithPath(desktopPath.stringByAppendingPathComponent("/Generated Moment of Silence.mov"))
+        
+        let exporter = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPreset640x480)
+        exporter.outputURL = exportURL
+        exporter.videoComposition = mainCompositionInst
+        exporter.outputFileType = AVFileTypeQuickTimeMovie
+        exporter.exportAsynchronouslyWithCompletionHandler({
+            dispatch_async(dispatch_get_main_queue(), {
+                self.showUserMessage("done??")
+            })
+        })
+        
+    }
+    
+    /*@IBAction func generateVideo(sender: NSButton) {
         var clips : [String] = []
         
         let dirs : [String]? = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .AllDomainsMask, true) as? [String]
@@ -59,18 +116,22 @@ class ViewController: NSViewController {
         var nextClipStart = kCMTimeZero
         
         for queuePath in clipQueue {
+            println("STARTING \(queuePath)")
             let clipAsset = AVAsset.assetWithURL(NSURL(fileURLWithPath: queuePath)) as AVAsset
             let clipAssetTrack = clipAsset.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack
+            let assetDuration = CMTimeMake(clipAsset.duration.value, clipAsset.duration.timescale)
             
             let instruction = AVMutableVideoCompositionInstruction()
             let thisClipStart = nextClipStart
-            instruction.timeRange = CMTimeRangeMake(thisClipStart, clipAsset.duration)
-            nextClipStart = CMTimeMake(nextClipStart.value - (clipAsset.duration.value - FADE_LENGTH), 30)
+            instruction.timeRange = CMTimeRangeMake(thisClipStart, assetDuration)
+            println("WILL START AT \(thisClipStart.value) AND LAST \(CGFloat(assetDuration.value) / CGFloat(assetDuration.timescale)))")
+            
+            nextClipStart = CMTimeMake(nextClipStart.value + (clipAsset.duration.value - FADE_LENGTH), 30)
             
             let transformer = AVMutableVideoCompositionLayerInstruction(assetTrack: clipAssetTrack)
-            let fadeInRange = CMTimeRangeMake(thisClipStart, CMTimeMake(thisClipStart.value + FADE_LENGTH, 30))
+            let fadeInRange = CMTimeRangeMake(thisClipStart, CMTimeMake(FADE_LENGTH, 30))
             transformer.setOpacityRampFromStartOpacity(0, toEndOpacity: 1, timeRange: fadeInRange)
-            let fadeOutRange = CMTimeRangeMake(nextClipStart, CMTimeMake(nextClipStart.value + FADE_LENGTH, 30))
+            let fadeOutRange = CMTimeRangeMake(nextClipStart, CMTimeMake(FADE_LENGTH, 30))
             transformer.setOpacityRampFromStartOpacity(1, toEndOpacity: 0, timeRange: fadeOutRange)
             
             instruction.layerInstructions = NSArray(object: transformer)
@@ -91,7 +152,7 @@ class ViewController: NSViewController {
                 self.showUserMessage("done??")
             })
         })
-    }
+    }*/
     
     func showUserMessage(message : String){
         println(message)
