@@ -14,6 +14,8 @@
 		441E69561A372E290004F0CA /* MOSSOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441E69551A372E290004F0CA /* MOSSOTests.swift */; };
 		44741C3F1A3735E50097DBFD /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44741C3E1A3735E50097DBFD /* AVKit.framework */; };
 		44741C411A3738040097DBFD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44741C401A3738030097DBFD /* AVFoundation.framework */; };
+		447533631A84F7A400E05B98 /* MSClip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447533621A84F7A400E05B98 /* MSClip.swift */; };
+		449011B21A8549CA00E00EF2 /* CMTimeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449011B11A8549CA00E00EF2 /* CMTimeExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		441E69551A372E290004F0CA /* MOSSOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MOSSOTests.swift; sourceTree = "<group>"; };
 		44741C3E1A3735E50097DBFD /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		44741C401A3738030097DBFD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		447533621A84F7A400E05B98 /* MSClip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSClip.swift; sourceTree = "<group>"; };
+		449011B11A8549CA00E00EF2 /* CMTimeExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CMTimeExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,9 +89,11 @@
 			children = (
 				441E69421A372E290004F0CA /* AppDelegate.swift */,
 				441E69441A372E290004F0CA /* ViewController.swift */,
+				447533621A84F7A400E05B98 /* MSClip.swift */,
 				441E69461A372E290004F0CA /* Images.xcassets */,
 				441E69481A372E290004F0CA /* Main.storyboard */,
 				441E69401A372E290004F0CA /* Supporting Files */,
+				449011B11A8549CA00E00EF2 /* CMTimeExtension.swift */,
 			);
 			path = MOSSO;
 			sourceTree = "<group>";
@@ -216,6 +222,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				449011B21A8549CA00E00EF2 /* CMTimeExtension.swift in Sources */,
+				447533631A84F7A400E05B98 /* MSClip.swift in Sources */,
 				441E69451A372E290004F0CA /* ViewController.swift in Sources */,
 				441E69431A372E290004F0CA /* AppDelegate.swift in Sources */,
 			);
