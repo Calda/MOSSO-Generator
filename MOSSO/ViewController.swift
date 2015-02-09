@@ -17,7 +17,7 @@ class ViewController: NSViewController {
     let editor = AVMutableVideoComposition()
     @IBOutlet weak var outputText: NSTextField!
     @IBOutlet weak var progressBar: NSProgressIndicator!
-    
+    let backgroundQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,8 @@ class ViewController: NSViewController {
     
     
     @IBAction func generateButtonClicked(sender: AnyObject) {
-        dispatch_async(dispatch_get_main_queue(), {
+        
+        dispatch_async(backgroundQueue, {
             self.generateVideo()
         })
     }
@@ -39,7 +40,7 @@ class ViewController: NSViewController {
         NSFileManager.defaultManager().removeItemAtPath(fileURL!.path!, error: &error)
         
         //generate new file
-        let clipQueue : [AVAsset] = generateClipQueue()
+        let (titleClipOpt, clipQueue) = generateClipQueue()
         let mixComposition = AVMutableComposition()
         var nextClipStart = kCMTimeZero
         var layerInstructions : [AVMutableVideoCompositionLayerInstruction] = []
@@ -47,6 +48,15 @@ class ViewController: NSViewController {
         
         showMessage("Creating Fades")
         progressBar.doubleValue = 0.2
+        
+        if let titleClip = titleClipOpt {
+            println(titleClip)
+            let titleTrack = mixComposition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: 1)
+            let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: titleTrack)
+            instruction.setOpacity(1.0, atTime: kCMTimeZero)
+            layerInstructions.append(instruction)
+            titleTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, titleClip.duration), ofTrack: titleClip.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack, atTime: kCMTimeZero, error: nil)
+        }
         
         for queuePath in clipQueue {
             let isLastClip = (queuePath == clipQueue.last!)
@@ -87,7 +97,7 @@ class ViewController: NSViewController {
     }
     
     
-    func generateClipQueue() -> [AVAsset] {
+    func generateClipQueue() -> (titleClip: AVAsset?, queue: [AVAsset]) {
         var clips : [String] = []
         
         //get all clips from folder
@@ -95,7 +105,7 @@ class ViewController: NSViewController {
         let path = dirs![0].stringByAppendingPathComponent("/MH Instruction/Moment of Silence")
         if let enumerator = fileManager.enumeratorAtPath(path) {
             while let file = enumerator.nextObject() as? String {
-                if file.hasSuffix(".mov") {
+                if file.hasSuffix(".mov") && !file.hasSuffix("SHOW OPEN.mov") && !file.hasSuffix("TEXT WITH ALPHA.mov") {
                     clips.append(path + "/" + file)
                 }
             }
@@ -124,7 +134,19 @@ class ViewController: NSViewController {
                 break;
             }
         }
-        return clipQueue
+        
+        let requiredPath = path.stringByAppendingPathComponent("/ REQUIRED")
+        let showOpenPath = requiredPath.stringByAppendingPathComponent("/SHOW OPEN.mov")
+        if let showOpenAsset = AVAsset.assetWithURL(NSURL(fileURLWithPath: showOpenPath)) as? AVAsset {
+            clipQueue.append(showOpenAsset)
+        } else {
+            error("SHOW OPEN NOT FOUND.")
+        }
+        
+        let titlePath = requiredPath.stringByAppendingPathComponent("/TEXT WITH ALPHA.mov")
+        let titleClip = AVAsset.assetWithURL(NSURL(fileURLWithPath: titlePath)) as? AVAsset
+        
+        return (titleClip, clipQueue)
     }
     
     
