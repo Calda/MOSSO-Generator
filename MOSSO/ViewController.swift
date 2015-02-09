@@ -40,7 +40,7 @@ class ViewController: NSViewController {
         NSFileManager.defaultManager().removeItemAtPath(fileURL!.path!, error: &error)
         
         //generate new file
-        let (titleClipOpt, clipQueue) = generateClipQueue()
+        let (titleClipOpt, titleStartTime, clipQueue) = generateClipQueue()
         let mixComposition = AVMutableComposition()
         var nextClipStart = kCMTimeZero
         var layerInstructions : [AVMutableVideoCompositionLayerInstruction] = []
@@ -53,9 +53,9 @@ class ViewController: NSViewController {
             println(titleClip)
             let titleTrack = mixComposition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: 1)
             let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: titleTrack)
-            instruction.setOpacity(1.0, atTime: kCMTimeZero)
+            instruction.setOpacity(1.0, atTime: titleStartTime)
             layerInstructions.append(instruction)
-            titleTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, titleClip.duration), ofTrack: titleClip.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack, atTime: kCMTimeZero, error: nil)
+            titleTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, titleClip.duration), ofTrack: titleClip.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack, atTime: titleStartTime, error: nil)
         }
         
         for queuePath in clipQueue {
@@ -97,7 +97,7 @@ class ViewController: NSViewController {
     }
     
     
-    func generateClipQueue() -> (titleClip: AVAsset?, queue: [AVAsset]) {
+    func generateClipQueue() -> (titleClip: AVAsset?, titleStart: CMTime, queue: [AVAsset]) {
         var clips : [String] = []
         
         //get all clips from folder
@@ -105,7 +105,7 @@ class ViewController: NSViewController {
         let path = dirs![0].stringByAppendingPathComponent("/MH Instruction/Moment of Silence")
         if let enumerator = fileManager.enumeratorAtPath(path) {
             while let file = enumerator.nextObject() as? String {
-                if file.hasSuffix(".mov") && !file.hasSuffix("SHOW OPEN.mov") && !file.hasSuffix("TEXT WITH ALPHA.mov") {
+                if file.hasSuffix(".mov") && !file.hasSuffix("SHOW OPEN.mov") && !file.hasSuffix("TEXT WITH ALPHA.mov") && !file.hasSuffix("COUNTDOWN.mov") {
                     clips.append(path + "/" + file)
                 }
             }
@@ -136,6 +136,13 @@ class ViewController: NSViewController {
         }
         
         let requiredPath = path.stringByAppendingPathComponent("/ REQUIRED")
+        let countdownPath = requiredPath.stringByAppendingPathComponent("/COUNTDOWN.mov")
+        var countdownLength = kCMTimeZero
+        if let countdownAsset = AVAsset.assetWithURL(NSURL(fileURLWithPath: countdownPath)) as? AVAsset {
+            clipQueue.insert(countdownAsset, atIndex: 0)
+            countdownLength = countdownAsset.duration
+        }
+        
         let showOpenPath = requiredPath.stringByAppendingPathComponent("/SHOW OPEN.mov")
         if let showOpenAsset = AVAsset.assetWithURL(NSURL(fileURLWithPath: showOpenPath)) as? AVAsset {
             clipQueue.append(showOpenAsset)
@@ -146,7 +153,7 @@ class ViewController: NSViewController {
         let titlePath = requiredPath.stringByAppendingPathComponent("/TEXT WITH ALPHA.mov")
         let titleClip = AVAsset.assetWithURL(NSURL(fileURLWithPath: titlePath)) as? AVAsset
         
-        return (titleClip, clipQueue)
+        return (titleClip, countdownLength, clipQueue)
     }
     
     
