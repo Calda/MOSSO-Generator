@@ -150,20 +150,22 @@ class ViewController: NSViewController {
             showMessage("No clips in folder (\(pathDisplay))")
         }
         
-        //create Clip Queue that adds up to 30s (<35s)
+        //create Clip Queue that adds up to 32s (<37s)
         var clipQueue : [AVAsset] = []
-        let currentDuration : CMTime = kCMTimeZero
+        var currentDuration : CMTime = kCMTimeZero
         
-        while currentDuration < CMTimeMake(30,1) {
+        while currentDuration < CMTimeMake(32,1) {
             let clipIndex = Int(random(min: 0, max: CGFloat(clips.count - 1)))
             let clipPath = clips[clipIndex]
             let clipAsset = AVAsset.assetWithURL(NSURL(fileURLWithPath: clipPath)) as AVAsset
             let possibleNewDuration = CMTimeAdd(currentDuration, clipAsset.duration)
-            if possibleNewDuration < CMTimeMake(35, 1) { //will not go over 35s
+            if possibleNewDuration < CMTimeMake(37, 1) { //will not go over 37s
                 clipQueue.append(clipAsset)
+                currentDuration = possibleNewDuration
+                println(currentDuration)
             }
             clips.removeAtIndex(clipIndex)
-            if possibleNewDuration > CMTimeMake(30, 1) || clips.count == 0 { //video is 30s or out of clips
+            if possibleNewDuration > CMTimeMake(32, 1) || clips.count == 0 { //video is 32s or out of clips
                 break;
             }
         }
