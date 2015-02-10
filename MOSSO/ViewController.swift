@@ -121,6 +121,9 @@ class ViewController: NSViewController {
             dispatch_async(dispatch_get_main_queue(), {
                 self.showMessage("Export Complete")
                 self.progressBar.doubleValue = 1
+                self.delay(2.5) { //close when done
+                    NSApplication.sharedApplication().terminate(self)
+                }
             })
         })
         
