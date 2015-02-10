@@ -18,6 +18,7 @@ class MSClip {
     let asset : AVAsset
     let startTime : CMTime
     let fadeIn : Bool
+    let includeSound : Bool
     
     var fadeUpEnd : CMTime {
         get {
@@ -44,10 +45,11 @@ class MSClip {
     }
     
     
-    init(asset: AVAsset, startTime: CMTime, fadeIn: Bool) {
+    init(asset: AVAsset, startTime: CMTime, fadeIn: Bool, includeSound: Bool) {
         self.asset = asset
         self.startTime = startTime
         self.fadeIn = fadeIn
+        self.includeSound = includeSound
     }
     
     
@@ -61,6 +63,13 @@ class MSClip {
         }
         
         track.insertTimeRange(CMTimeRangeMake(kCMTimeZero, asset.duration), ofTrack: asset.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack, atTime: startTime, error: nil)
+        
+        if includeSound {
+            if let assetSound = asset.tracksWithMediaType(AVMediaTypeAudio)[0] as? AVAssetTrack {
+                let soundtrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: 1)
+                soundtrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, asset.duration), ofTrack: assetSound, atTime: startTime, error: nil)
+            }
+        }
         
         return layerInstruction
     }

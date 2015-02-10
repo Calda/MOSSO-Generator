@@ -24,6 +24,11 @@ class ViewController: NSViewController {
     }
     
     
+    override func viewDidDisappear() {
+        NSApplication.sharedApplication().terminate(self)
+    }
+    
+    
     @IBAction func generateButtonClicked(sender: AnyObject) {
         
         dispatch_async(backgroundQueue, {
@@ -35,7 +40,7 @@ class ViewController: NSViewController {
     func generateVideo() {
         //delete previous file
         let desktopPath = NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)[0] as String
-        let fileURL = NSURL.fileURLWithPath(desktopPath.stringByAppendingPathComponent("/Generated Moment of Silence.mov"))
+        let fileURL = NSURL.fileURLWithPath(desktopPath.stringByAppendingPathComponent("/Generated MOSSO.mov"))
         var error:NSError?
         NSFileManager.defaultManager().removeItemAtPath(fileURL!.path!, error: &error)
         
@@ -59,9 +64,10 @@ class ViewController: NSViewController {
         }
         
         for queuePath in clipQueue {
+            let isFirstClip = (queuePath == clipQueue.first!)
             let isLastClip = (queuePath == clipQueue.last!)
             
-            let queueClip = MSClip(asset: queuePath, startTime: nextClipStart, fadeIn: !isLastClip)
+            let queueClip = MSClip(asset: queuePath, startTime: nextClipStart, fadeIn: !isLastClip, includeSound: isFirstClip || isLastClip)
             nextClipStart = queueClip.nextClipStart
             let layerInstruction = queueClip.buildInstruction(mixComposition)
             layerInstructions.append(layerInstruction)
@@ -73,6 +79,30 @@ class ViewController: NSViewController {
         
         showMessage("Exporting File")
         progressBar.doubleValue = 0.4
+        
+        //decoration delay
+        delay(2) {
+            self.showMessage("Working.")
+            self.progressBar.doubleValue = 0.5
+        }
+        delay(2.25) {
+            self.showMessage("Working..")
+            self.progressBar.doubleValue = 0.55
+        }
+        delay(2.5) {
+            self.showMessage("Working...")
+            self.progressBar.doubleValue = 0.6
+        }
+        
+        delay(5) {
+            self.showMessage("This is gonna be a sec...")
+            self.progressBar.doubleValue = 0.7
+        }
+        
+        delay(9) {
+            self.showMessage("Almost there...")
+            self.progressBar.doubleValue = 0.85
+        }
         
         let mainInstruction = AVMutableVideoCompositionInstruction()
         mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, mixLength)
@@ -102,7 +132,7 @@ class ViewController: NSViewController {
         
         //get all clips from folder
         let dirs : [String]? = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .AllDomainsMask, true) as? [String]
-        let path = dirs![0].stringByAppendingPathComponent("/MH Instruction/Moment of Silence")
+        let path = dirs![0].stringByAppendingPathComponent("/MH Instruction/MOSSO")
         if let enumerator = fileManager.enumeratorAtPath(path) {
             while let file = enumerator.nextObject() as? String {
                 if file.hasSuffix(".mov") && !file.hasSuffix("SHOW OPEN.mov") && !file.hasSuffix("TEXT WITH ALPHA.mov") && !file.hasSuffix("COUNTDOWN.mov") {
@@ -173,5 +203,10 @@ class ViewController: NSViewController {
         return CGFloat(Float(arc4random()) / 0xFFFFFFFF) * (max - min) + min
     }
 
+    func delay(delay:Double, closure:()->()) {
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
+        dispatch_after(time, dispatch_get_main_queue(), closure)
+    }
+    
 }
 
