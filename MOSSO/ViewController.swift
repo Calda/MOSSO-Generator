@@ -55,7 +55,6 @@ class ViewController: NSViewController {
         progressBar.doubleValue = 0.2
         
         if let titleClip = titleClipOpt {
-            println(titleClip)
             let titleTrack = mixComposition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: 1)
             let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: titleTrack)
             instruction.setOpacity(1.0, atTime: titleStartTime)
@@ -67,7 +66,7 @@ class ViewController: NSViewController {
             let isFirstClip = (queuePath == clipQueue.first!)
             let isLastClip = (queuePath == clipQueue.last!)
             
-            let queueClip = MSClip(asset: queuePath, startTime: nextClipStart, fadeIn: !isLastClip, includeSound: isFirstClip || isLastClip)
+            let queueClip = MSClip(asset: queuePath, startTime: nextClipStart, fadeIn: !isLastClip && !isFirstClip, includeSound: isFirstClip || isLastClip)
             nextClipStart = queueClip.nextClipStart
             let layerInstruction = queueClip.buildInstruction(mixComposition)
             layerInstructions.append(layerInstruction)
@@ -121,9 +120,8 @@ class ViewController: NSViewController {
             dispatch_async(dispatch_get_main_queue(), {
                 self.showMessage("Export Complete")
                 self.progressBar.doubleValue = 1
-                self.delay(2.5) { //close when done
-                    NSApplication.sharedApplication().terminate(self)
-                }
+                NSWorkspace.sharedWorkspace().openFile(fileURL!.path!)
+                NSApplication.sharedApplication().terminate(self)
             })
         })
         
@@ -135,10 +133,10 @@ class ViewController: NSViewController {
         
         //get all clips from folder
         let dirs : [String]? = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .AllDomainsMask, true) as? [String]
-        let path = dirs![0].stringByAppendingPathComponent("/MH Instruction/MOSSO")
+        let path = dirs![0].stringByAppendingPathComponent("/MOSSO")
         if let enumerator = fileManager.enumeratorAtPath(path) {
             while let file = enumerator.nextObject() as? String {
-                if file.hasSuffix(".mov") && !file.hasSuffix("SHOW OPEN.mov") && !file.hasSuffix("TEXT WITH ALPHA.mov") && !file.hasSuffix("COUNTDOWN.mov") {
+                if file.hasSuffix(".mov") && !(file as NSString).containsString("REQUIRED") && !(file as NSString).containsString("SHOW OPEN") {
                     clips.append(path + "/" + file)
                 }
             }
@@ -178,9 +176,8 @@ class ViewController: NSViewController {
             countdownLength = countdownAsset.duration
         }
         
-        let showOpenPath = requiredPath.stringByAppendingPathComponent("/SHOW OPEN.mov")
-        if let showOpenAsset = AVAsset.assetWithURL(NSURL(fileURLWithPath: showOpenPath)) as? AVAsset {
-            clipQueue.append(showOpenAsset)
+        if let showOpen = chooseShowOpen(path.stringByAppendingPathComponent("/ SHOW OPEN")) {
+            clipQueue.append(showOpen)
         } else {
             error("SHOW OPEN NOT FOUND.")
         }
@@ -189,6 +186,49 @@ class ViewController: NSViewController {
         let titleClip = AVAsset.assetWithURL(NSURL(fileURLWithPath: titlePath)) as? AVAsset
         
         return (titleClip, countdownLength, clipQueue)
+    }
+    
+    
+    func chooseShowOpen(showOpenFolder: String) -> AVAsset? {
+        var showOpens : [(path: String, lots: Int)] = []
+        if let enumerator = fileManager.enumeratorAtPath(showOpenFolder) {
+            while let file = enumerator.nextObject() as? String {
+                if file.hasSuffix(".mov") {
+                    showOpens.append(path: file, lots: 1)
+                }
+            }
+        }
+        //load lots
+        var totalLotCount = 0
+        for i in 0...showOpens.count - 1 {
+            let path : String = showOpens[i].path
+            let nsPath = path as NSString
+            let noEnding = nsPath.substringToIndex(nsPath.length - 4)
+            let splits = split(noEnding){ $0 == " " }
+            if let lotCount = splits[splits.count - 1].toInt() {
+                showOpens[i].lots = lotCount
+                totalLotCount += lotCount
+            } else {
+                totalLotCount += 1
+            }
+        }
+        var lotRanges : [(low: Int, path: String)] = []
+        var previousLow : Int = 0
+        for (path, lots) in showOpens {
+            lotRanges.append(low: previousLow + 0, path: path)
+            previousLow += lots
+        }
+        let selectedLot = Int(random(min: 0, max: CGFloat(previousLow)))
+        for i in 0...lotRanges.count - 1 {
+            let low = lotRanges[i].low
+            let high = (i == lotRanges.count - 1 ? previousLow : lotRanges[i + 1].low)
+            if selectedLot > low && selectedLot < high {
+                //we have a winner
+                let selectedPath = showOpenFolder.stringByAppendingPathComponent(lotRanges[i].path)
+                return AVAsset.assetWithURL(NSURL(fileURLWithPath: selectedPath)) as? AVAsset
+            }
+        }
+        return nil
     }
     
     
