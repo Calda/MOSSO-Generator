@@ -373,30 +373,14 @@
             <objects>
                 <viewController title="MOSSO Generator" id="XfG-lQ-9wD" customClass="ViewController" customModule="MOSSO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" alphaValue="0.5" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="241" height="101"/>
+                        <rect key="frame" x="0.0" y="0.0" width="267" height="75"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lzD-0p-HwB">
-                                <rect key="frame" x="-2" y="78" width="245" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Ready to Generate" id="awQ-mq-X7C">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <pathControl wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1V9-7U-ihD">
-                                <rect key="frame" x="0.0" y="-2" width="241" height="22"/>
-                                <pathCell key="cell" selectable="YES" editable="YES" alignment="left" id="Zqi-nL-ntw">
-                                    <font key="font" metaFont="system"/>
-                                    <url key="url" string="file:///Users/dfafilm9/Desktop/"/>
-                                    <color key="backgroundColor" red="0.89803921568627454" green="0.92549019607843142" blue="0.97254901960784312" alpha="1" colorSpace="deviceRGB"/>
-                                </pathCell>
-                            </pathControl>
                             <progressIndicator wantsLayer="YES" fixedFrame="YES" maxValue="1" doubleValue="1" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="6Ce-Oz-XMV">
-                                <rect key="frame" x="9" y="23" width="223" height="20"/>
+                                <rect key="frame" x="4" y="9" width="258" height="20"/>
                             </progressIndicator>
                             <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TSf-vT-whg">
-                                <rect key="frame" x="72" y="42" width="97" height="32"/>
+                                <rect key="frame" x="-2" y="38" width="97" height="32"/>
                                 <buttonCell key="cell" type="push" title="Generate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="K6q-h4-BSm">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -405,6 +389,14 @@
                                     <action selector="generateButtonClicked:" target="XfG-lQ-9wD" id="8mv-mZ-J5h"/>
                                 </connections>
                             </button>
+                            <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lzD-0p-HwB">
+                                <rect key="frame" x="99" y="36" width="170" height="39"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Ready to Generate" id="awQ-mq-X7C">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
@@ -414,7 +406,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="264.5" y="464.5"/>
+            <point key="canvasLocation" x="277.5" y="451.5"/>
         </scene>
     </scenes>
 </document>

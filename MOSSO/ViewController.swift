@@ -18,6 +18,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var outputText: NSTextField!
     @IBOutlet weak var progressBar: NSProgressIndicator!
     let backgroundQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
+    var exporter : AVAssetExportSession = AVAssetExportSession()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +30,9 @@ class ViewController: NSViewController {
     }
     
     
-    @IBAction func generateButtonClicked(sender: AnyObject) {
-        
+    @IBAction func generateButtonClicked(sender: NSButton) {
+        sender.enabled = false
+        sender.stringValue = "Generating..."
         dispatch_async(backgroundQueue, {
             self.generateVideo()
         })
@@ -38,6 +40,14 @@ class ViewController: NSViewController {
     
     
     func generateVideo() {
+        let testPath = (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String).stringByAppendingPathComponent("/MOSSO/ SHOW OPEN")
+        for i in 0...1000 {
+            let desktopPath = NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)[0] as String
+            if chooseShowOpen(testPath) == nil {
+                println("nil :(")
+            }
+        }
+        
         //delete previous file
         let desktopPath = NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)[0] as String
         let fileURL = NSURL.fileURLWithPath(desktopPath.stringByAppendingPathComponent("/Generated MOSSO.mov"))
@@ -50,9 +60,6 @@ class ViewController: NSViewController {
         var nextClipStart = kCMTimeZero
         var layerInstructions : [AVMutableVideoCompositionLayerInstruction] = []
         var mixLength : CMTime = kCMTimeZero
-        
-        showMessage("Creating Fades")
-        progressBar.doubleValue = 0.2
         
         if let titleClip = titleClipOpt {
             let titleTrack = mixComposition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: 1)
@@ -76,31 +83,63 @@ class ViewController: NSViewController {
             }
         }
         
-        showMessage("Exporting File")
-        progressBar.doubleValue = 0.4
+        var flavorTexts = [
+            "Evaluating shot composition",
+            "Color correcting footage",
+            "Recording a new Show Open song",
+            "Entering file into Media Festival",
+            "Decrypting ancient SD video codecs",
+            "Searching for clips",
+            "Shushing students",
+            "Finding nirvana",
+            "Watching grass grow",
+            "Watching paint dry",
+            "Thanks for waiting",
+            "You're in AV2 aren't you?",
+            "Sending Toto back to Oz",
+            "Generating amusing loading text",
+            "Discovering the meaning of silence",
+            "Evolving the most serene plant known to man",
+            "Creating a better MOSSO than Hennessy ever could",
+            "MOSSO escaping from Alcatraz",
+            "Raising a child and naming is MOSSO",
+            "Color correcting to intergalactic broadcast standards",
+            "Sending video drones to record last minute clips",
+            "Dividing by zero",
+            "Subtracting points from show grade",
+            "Giving the gift of life (Roxanne)",
+            "Toto does lunch AND credits",
+            "Retreiving lunch menu from Mrs.Winstead",
+            "This will only take a Moment",
+            "Misspelling someting",
+            "Your paitience is underappreciated probably",
+            "Laughing at my own jokes",
+            "Splicing Serenity gene into plant DNA",
+            "Mowing the senior grass",
+            "Trimming our hedges"
+        ]
         
-        //decoration delay
-        delay(2) {
-            self.showMessage("Working.")
-            self.progressBar.doubleValue = 0.5
-        }
-        delay(2.25) {
-            self.showMessage("Working..")
-            self.progressBar.doubleValue = 0.55
-        }
-        delay(2.5) {
-            self.showMessage("Working...")
-            self.progressBar.doubleValue = 0.6
+        for _ in 0...10 { //shuffle
+            flavorTexts.sort { (_,_) in arc4random() < arc4random() }
         }
         
-        delay(5) {
-            self.showMessage("This is gonna be a sec...")
-            self.progressBar.doubleValue = 0.7
-        }
-        
-        delay(9) {
-            self.showMessage("Almost there...")
-            self.progressBar.doubleValue = 0.85
+        for i in 0...(flavorTexts.count - 1) {
+            delay(Double(i * 3)) {
+                if self.exporter.progress == 1.0 { return }
+                self.showMessage("\(flavorTexts[i])")
+            }
+            delay(Double(i * 3) + 0.3) {
+                if self.exporter.progress == 1.0 { return }
+                self.showMessage("\(flavorTexts[i]).")
+            }
+            delay(Double(i * 3) + 0.6) {
+                if self.exporter.progress == 1.0 { return }
+                self.showMessage("\(flavorTexts[i])..")
+            }
+            delay(Double(i * 3) + 0.9) {
+                if self.exporter.progress == 1.0 { return }
+                self.showMessage("\(flavorTexts[i])...")
+            }
         }
         
         let mainInstruction = AVMutableVideoCompositionInstruction()
@@ -112,19 +151,29 @@ class ViewController: NSViewController {
         mainCompositionInst.frameDuration = CMTimeMake(1, 30)
         mainCompositionInst.renderSize = CGSizeMake(640, 480)
         
-        let exporter = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPreset640x480)
+        exporter = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPreset640x480)
         exporter.outputURL = fileURL
         exporter.videoComposition = mainCompositionInst
         exporter.outputFileType = AVFileTypeQuickTimeMovie
         exporter.exportAsynchronouslyWithCompletionHandler({
             dispatch_async(dispatch_get_main_queue(), {
-                self.showMessage("Export Complete")
-                self.progressBar.doubleValue = 1
-                NSWorkspace.sharedWorkspace().openFile(fileURL!.path!)
-                NSApplication.sharedApplication().terminate(self)
+                self.showMessage("Export Complete. Opening MOSSO...")
+                self.delay(1.5) {
+                    NSWorkspace.sharedWorkspace().openFile(fileURL!.path!)
+                    NSApplication.sharedApplication().terminate(self)
+                }
             })
         })
-        
+        updateProgress()
+    }
+    
+    func updateProgress() {
+        self.progressBar.doubleValue = Double(self.exporter.progress)
+        self.progressBar.indeterminate = self.exporter.progress > 0.99
+        self.progressBar.setNeedsDisplayInRect(self.progressBar.frame)
+        delay(0.1) {
+            self.updateProgress()
+        }
     }
     
     
@@ -218,11 +267,11 @@ class ViewController: NSViewController {
             lotRanges.append(low: previousLow + 0, path: path)
             previousLow += lots
         }
-        let selectedLot = Int(random(min: 0, max: CGFloat(previousLow)))
+        let selectedLot = Int(random(min: 1, max: CGFloat(previousLow)))
         for i in 0...lotRanges.count - 1 {
             let low = lotRanges[i].low
             let high = (i == lotRanges.count - 1 ? previousLow : lotRanges[i + 1].low)
-            if selectedLot > low && selectedLot < high {
+            if selectedLot > low && selectedLot <= high {
                 //we have a winner
                 let selectedPath = showOpenFolder.stringByAppendingPathComponent(lotRanges[i].path)
                 return AVAsset.assetWithURL(NSURL(fileURLWithPath: selectedPath)) as? AVAsset
