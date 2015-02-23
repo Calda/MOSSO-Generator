@@ -16,6 +16,7 @@
 		44741C411A3738040097DBFD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44741C401A3738030097DBFD /* AVFoundation.framework */; };
 		447533631A84F7A400E05B98 /* MSClip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447533621A84F7A400E05B98 /* MSClip.swift */; };
 		449011B21A8549CA00E00EF2 /* CMTimeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449011B11A8549CA00E00EF2 /* CMTimeExtension.swift */; };
+		77D864EE1A9B64FE001DBF13 /* Moment of Silence Generator.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D864ED1A9B64FE001DBF13 /* Moment of Silence Generator.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		44741C401A3738030097DBFD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		447533621A84F7A400E05B98 /* MSClip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSClip.swift; sourceTree = "<group>"; };
 		449011B11A8549CA00E00EF2 /* CMTimeExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CMTimeExtension.swift; sourceTree = "<group>"; };
+		77D864ED1A9B64FE001DBF13 /* Moment of Silence Generator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Moment of Silence Generator.png"; path = "Images.xcassets/AppIcon.appiconset/Moment of Silence Generator.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		441E69401A372E290004F0CA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				77D864ED1A9B64FE001DBF13 /* Moment of Silence Generator.png */,
 				441E69411A372E290004F0CA /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -204,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				441E69471A372E290004F0CA /* Images.xcassets in Resources */,
+				77D864EE1A9B64FE001DBF13 /* Moment of Silence Generator.png in Resources */,
 				441E694A1A372E290004F0CA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

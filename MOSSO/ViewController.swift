@@ -19,6 +19,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var progressBar: NSProgressIndicator!
     let backgroundQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
     var exporter : AVAssetExportSession = AVAssetExportSession()
+    @IBOutlet weak var icon: NSImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,11 @@ class ViewController: NSViewController {
     @IBAction func generateButtonClicked(sender: NSButton) {
         sender.enabled = false
         sender.stringValue = "Generating..."
+        sender.animator().alphaValue = 0
+        NSAnimationContext.runAnimationGroup({ context in
+            context.duration = 1.0
+            sender.animator().alphaValue = 0
+        }, completionHandler: nil)
         dispatch_async(backgroundQueue, {
             self.generateVideo()
         })
@@ -102,21 +108,70 @@ class ViewController: NSViewController {
             "Evolving the most serene plant known to man",
             "Creating a better MOSSO than Hennessy ever could",
             "MOSSO escaping from Alcatraz",
-            "Raising a child and naming is MOSSO",
+            "Raising a child and naming it MOSSO",
             "Color correcting to intergalactic broadcast standards",
             "Sending video drones to record last minute clips",
             "Dividing by zero",
             "Subtracting points from show grade",
             "Giving the gift of life (Roxanne)",
             "Toto does lunch AND credits",
-            "Retreiving lunch menu from Mrs.Winstead",
+            "Retreiving lunch menu from Mrs. Winstead",
             "This will only take a Moment",
             "Misspelling someting",
             "Your paitience is underappreciated probably",
             "Laughing at my own jokes",
             "Splicing Serenity gene into plant DNA",
             "Mowing the senior grass",
-            "Trimming our hedges"
+            "Trimming our hedges",
+            "Making Mr. Cowins clean the courtyard",
+            "Replacing Hennessy with a new teacher",
+            "Making everyone watch the show",
+            "Developing MOSSO Generator 2.0",
+            "Making a show better than local news",
+            "Broadcasting onto WJBF",
+            "Hacking News Channel 6",
+            "Electing Hennessy Supreme Commander of Augusta",
+            "Force quitting MOSSO Generator",
+            "Initiating kernel panic",
+            "Using all 200% of the processor",
+            "Overclocking Camera 2",
+            "Upgrading internal TV network to 4K",
+            "10110001101001001001010010011011100",
+            "Making up technical jargon",
+            "Filing $150,000 purchase order",
+            "Requesting that Apple make MOSSO Generator a bundled app on OS X",
+            "Releasing OS XI: Hennessy (theme: infamous men)",
+            "Waiting in line to buy Windows 95",
+            "Upgrading to Snow Leopard",
+            "Installing Windows Vista in boot camp",
+            "Renaming WDFA to HENN",
+            "Building a new studio",
+            "Doing everything except actually generating a MOSSO",
+            "Reusing old jokes",
+            "Replacing Show Open with Basketweave",
+            "Dragging every application to Dock",
+            "Launching Final Cut so you can generate it yourself",
+            "Replacing iMacs with Microsoft Surface Pros",
+            "Rerouting train tracks through studio",
+            "Preparing intercom interruption",
+            "Prerecording the show",
+            "Broadcasting yesterday's show. Hopefully nobody will notice",
+            "Generating the same thing as yesterday",
+            "<flavor text 384.txt> not found",
+            "Using effect 615",
+            "Inverting colors",
+            "You better be laughing at this",
+            "Using a natural language generator to make more funny jokes",
+            "Constructing loft in editing room",
+            "Winning media festival",
+            "I'm cooler than Producer Buddy",
+            "There's profanity in here somewhere",
+            "...",
+            "MOSSO Generator is typing",
+            "Telling another useless story",
+            "MOSSO Generator: Funny jokes since 2015",
+            "It's 2020!?!? And you're still using MOSSO Generator??? What the hell",
+            "I'm so 2000 and 8, you're so 2000 and late"
         ]
         
         for _ in 0...10 { //shuffle
@@ -171,6 +226,7 @@ class ViewController: NSViewController {
         self.progressBar.doubleValue = Double(self.exporter.progress)
         self.progressBar.indeterminate = self.exporter.progress > 0.99
         self.progressBar.setNeedsDisplayInRect(self.progressBar.frame)
+        self.icon.alphaValue = CGFloat(0.1 + (self.exporter.progress * 0.9))
         delay(0.1) {
             self.updateProgress()
         }
