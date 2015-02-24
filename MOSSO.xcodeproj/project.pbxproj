@@ -16,6 +16,7 @@
 		44741C411A3738040097DBFD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44741C401A3738030097DBFD /* AVFoundation.framework */; };
 		447533631A84F7A400E05B98 /* MSClip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447533621A84F7A400E05B98 /* MSClip.swift */; };
 		449011B21A8549CA00E00EF2 /* CMTimeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449011B11A8549CA00E00EF2 /* CMTimeExtension.swift */; };
+		777B61321A9CFC6900D920FE /* OverrideVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777B61311A9CFC6900D920FE /* OverrideVideoController.swift */; };
 		77D864EE1A9B64FE001DBF13 /* Moment of Silence Generator.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D864ED1A9B64FE001DBF13 /* Moment of Silence Generator.png */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		44741C401A3738030097DBFD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		447533621A84F7A400E05B98 /* MSClip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSClip.swift; sourceTree = "<group>"; };
 		449011B11A8549CA00E00EF2 /* CMTimeExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CMTimeExtension.swift; sourceTree = "<group>"; };
+		777B61311A9CFC6900D920FE /* OverrideVideoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverrideVideoController.swift; sourceTree = "<group>"; };
 		77D864ED1A9B64FE001DBF13 /* Moment of Silence Generator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Moment of Silence Generator.png"; path = "Images.xcassets/AppIcon.appiconset/Moment of Silence Generator.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +93,7 @@
 			children = (
 				441E69421A372E290004F0CA /* AppDelegate.swift */,
 				441E69441A372E290004F0CA /* ViewController.swift */,
+				777B61311A9CFC6900D920FE /* OverrideVideoController.swift */,
 				447533621A84F7A400E05B98 /* MSClip.swift */,
 				441E69461A372E290004F0CA /* Images.xcassets */,
 				441E69481A372E290004F0CA /* Main.storyboard */,
@@ -230,6 +233,7 @@
 				447533631A84F7A400E05B98 /* MSClip.swift in Sources */,
 				441E69451A372E290004F0CA /* ViewController.swift in Sources */,
 				441E69431A372E290004F0CA /* AppDelegate.swift in Sources */,
+				777B61321A9CFC6900D920FE /* OverrideVideoController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

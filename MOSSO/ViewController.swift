@@ -10,6 +10,7 @@ import Cocoa
 import AVKit
 import AVFoundation
 import AppKit
+import Quartz
 
 class ViewController: NSViewController {
 
@@ -20,6 +21,13 @@ class ViewController: NSViewController {
     let backgroundQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
     var exporter : AVAssetExportSession = AVAssetExportSession()
     @IBOutlet weak var icon: NSImageView!
+    
+    var showOpenOverride : AVAsset?
+    var overrideSetting : OverrideSetting = .Random30
+    
+    enum OverrideSetting {
+        case Random30, First30, All
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -170,8 +178,6 @@ class ViewController: NSViewController {
             "MOSSO Generator is typing",
             "Telling another useless story",
             "MOSSO Generator: Funny jokes since 2015",
-            "It's 2020!?!? And you're still using MOSSO Generator??? What the hell",
-            "I'm so 2000 and 8, you're so 2000 and late"
         ]
         
         for _ in 0...10 { //shuffle
@@ -214,6 +220,7 @@ class ViewController: NSViewController {
             dispatch_async(dispatch_get_main_queue(), {
                 self.showMessage("Export Complete. Opening MOSSO...")
                 self.delay(1.5) {
+                    while !self.fileManager.fileExistsAtPath(fileURL!.path!) { }
                     NSWorkspace.sharedWorkspace().openFile(fileURL!.path!)
                     NSApplication.sharedApplication().terminate(self)
                 }
@@ -230,6 +237,7 @@ class ViewController: NSViewController {
         delay(0.1) {
             self.updateProgress()
         }
+        
     }
     
     
@@ -356,6 +364,16 @@ class ViewController: NSViewController {
     func delay(delay:Double, closure:()->()) {
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
         dispatch_after(time, dispatch_get_main_queue(), closure)
+    }
+    
+    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showOverrides" {
+            if let window = segue.destinationController as? NSWindowController {
+                if let override = window.contentViewController as? OverrideVideoController {
+                    override.mosso = self
+                }
+            }
+        }
     }
     
 }

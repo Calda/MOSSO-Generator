@@ -14,21 +14,12 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="MOSSO Generator" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="About MOSSO" id="5kV-Vb-QxS">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="About Generator" keyEquivalent="?" id="pIX-t4-QCU">
                                             <connections>
-                                                <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
+                                                <segue destination="GTr-9Y-AQ9" kind="modal" id="16g-Tg-ZBq"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
-                                        <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
-                                        <menuItem title="Services" id="NMo-om-nkz">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
-                                        <menuItem title="Hide MOSSO" keyEquivalent="h" id="Olw-nP-bQN">
+                                        <menuItem title="Hide Generator" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
                                                 <action selector="hide:" target="Ady-hI-5gd" id="PnN-Uc-m68"/>
                                             </connections>
@@ -43,12 +34,6 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="unhideAllApplications:" target="Ady-hI-5gd" id="Dhg-Le-xox"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                                        <menuItem title="Quit MOSSO" keyEquivalent="q" id="4sb-4s-VLi">
-                                            <connections>
-                                                <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -327,18 +312,6 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Help" id="wpr-3q-Mcd">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
-                                    <items>
-                                        <menuItem title="MOSSO Help" keyEquivalent="?" id="FKE-Sm-Kum">
-                                            <connections>
-                                                <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </menuItem>
                         </items>
                     </menu>
                     <connections>
@@ -348,15 +321,155 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="MOSSO" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="254.5" y="5"/>
+            <point key="canvasLocation" x="-206.5" y="20"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="Oxt-U7-NQI">
+            <objects>
+                <windowController id="GTr-9Y-AQ9" sceneMemberID="viewController">
+                    <window key="window" title="About" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="SPv-pG-jVT">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" unifiedTitleAndToolbar="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES"/>
+                        <rect key="contentRect" x="227" y="458" width="350" height="200"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+                        <value key="minSize" type="size" width="350" height="200"/>
+                        <value key="maxSize" type="size" width="350" height="200"/>
+                    </window>
+                    <connections>
+                        <segue destination="VsJ-yl-Wyu" kind="relationship" relationship="window.shadowedContentViewController" id="Ch2-Ys-YYp"/>
+                    </connections>
+                </windowController>
+                <customObject id="bBr-4a-Vsr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-99" y="664"/>
+        </scene>
+        <!--About MOSSO Generator-->
+        <scene sceneID="0le-Xb-oCM">
+            <objects>
+                <viewController title="About MOSSO Generator" id="VsJ-yl-Wyu" sceneMemberID="viewController">
+                    <view key="view" id="Vl4-Zo-KgC">
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="200"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" alphaValue="0.30000000000000016" translatesAutoresizingMaskIntoConstraints="NO" id="1WH-Uj-WNq">
+                                <rect key="frame" x="-23" y="-31" width="246" height="246"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Moment of Silence Generator" id="qfn-M0-vJs"/>
+                            </imageView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rMX-VV-q5I">
+                                <rect key="frame" x="60" y="166" width="192" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="MOSSO Generator" id="gBd-gY-hEz">
+                                    <font key="font" size="17" name="Helvetica-Bold"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qnq-Fw-Ih0">
+                                <rect key="frame" x="42" y="145" width="192" height="19"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="by Cal Stephens" id="8sh-LK-PzI">
+                                    <font key="font" size="15" name="Helvetica"/>
+                                    <color key="textColor" red="0.22908775252525249" green="0.22908775252525249" blue="0.22908775252525249" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="axu-yJ-qmt">
+                                <rect key="frame" x="156" y="164" width="192" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="1.1.0" id="IKD-YM-rVE">
+                                    <font key="font" size="15" name="Helvetica"/>
+                                    <color key="textColor" name="scrollBarColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kbw-Py-cZv">
+                                <rect key="frame" x="221" y="123" width="104" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Code by Cal Stephens" id="tRg-y0-C6j">
+                                    <font key="font" metaFont="miniSystem"/>
+                                    <color key="textColor" name="scrollBarColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iK2-nk-Aq0">
+                                <rect key="frame" x="224" y="109" width="110" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Open Source on GitHub" id="mLp-CL-EJN">
+                                    <font key="font" metaFont="miniSystem"/>
+                                    <color key="textColor" name="scrollBarColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ofv-Mc-2rW">
+                                <rect key="frame" x="228" y="96" width="110" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="github.com/calda" id="BT3-JH-asw">
+                                    <font key="font" metaFont="miniSystem"/>
+                                    <color key="textColor" name="scrollBarColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QGF-Bs-s7J">
+                                <rect key="frame" x="229" y="78" width="110" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Icon by Jacob Wall" id="vhq-vD-xY2">
+                                    <font key="font" metaFont="miniSystem"/>
+                                    <color key="textColor" name="scrollBarColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HNP-Lr-0LH">
+                                <rect key="frame" x="228" y="60" width="110" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Loading texts by" id="n96-qr-dOa">
+                                    <font key="font" metaFont="miniSystem"/>
+                                    <color key="textColor" name="scrollBarColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0lj-oF-VVU">
+                                <rect key="frame" x="226" y="48" width="110" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Cal Stephens" id="Cs2-D2-zsR">
+                                    <font key="font" metaFont="miniSystem"/>
+                                    <color key="textColor" name="scrollBarColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ouO-AP-dHB">
+                                <rect key="frame" x="222" y="35" width="110" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Nate Thompson" id="aCb-Jv-B0h">
+                                    <font key="font" metaFont="miniSystem"/>
+                                    <color key="textColor" name="scrollBarColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="37R-ov-qEH">
+                                <rect key="frame" x="214" y="23" width="110" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Logan McElroy" id="snQ-2t-nvE">
+                                    <font key="font" metaFont="miniSystem"/>
+                                    <color key="textColor" name="scrollBarColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mji-9I-bkM">
+                                <rect key="frame" x="197" y="2" width="151" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="© Open Sourced February 2015" id="cLA-zm-JO0">
+                                    <font key="font" metaFont="miniSystem"/>
+                                    <color key="textColor" name="scrollBarColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="1WH-Uj-WNq" firstAttribute="top" secondItem="Vl4-Zo-KgC" secondAttribute="top" constant="-15" id="Npk-sR-89g"/>
+                            <constraint firstItem="1WH-Uj-WNq" firstAttribute="leading" secondItem="Vl4-Zo-KgC" secondAttribute="leading" constant="-23" id="UwO-Vt-JkQ"/>
+                            <constraint firstAttribute="bottom" secondItem="1WH-Uj-WNq" secondAttribute="bottom" constant="-31" id="hZo-Hi-v8f"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="QtE-0z-pf1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-99" y="672"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <rect key="contentRect" x="678" y="357" width="400" height="300"/>
+                    <window key="window" title="MOSSO Generator" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                        <rect key="contentRect" x="678" y="357" width="208" height="85"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <value key="minSize" type="size" width="400" height="300"/>
                         <value key="maxSize" type="size" width="400" height="300"/>
@@ -367,7 +480,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="674" y="117"/>
+            <point key="canvasLocation" x="158" y="-107.5"/>
         </scene>
         <!--MOSSO Generator-->
         <scene sceneID="hIz-AP-VOD">
@@ -412,6 +525,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" size="21" name=".HelveticaNeueDeskInterface-Regular"/>
                                 </buttonCell>
+                                <connections>
+                                    <segue destination="Xro-5W-rWz" kind="show" identifier="showOverrides" id="qi4-aE-UKd"/>
+                                </connections>
                             </button>
                             <button wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2Pq-84-lga">
                                 <rect key="frame" x="-2" y="273" width="31" height="26"/>
@@ -423,6 +539,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <segue destination="GTr-9Y-AQ9" kind="show" id="CkY-0s-hda"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
@@ -451,10 +570,118 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="414" y="531.5"/>
+            <point key="canvasLocation" x="158" y="259.5"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="Q6E-tQ-VBf">
+            <objects>
+                <windowController id="Xro-5W-rWz" sceneMemberID="viewController">
+                    <window key="window" title="Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="RaM-TJ-yq3">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                        <rect key="contentRect" x="1136" y="486" width="193" height="123"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+                        <value key="minSize" type="size" width="193" height="123"/>
+                        <value key="maxSize" type="size" width="193" height="123"/>
+                    </window>
+                    <connections>
+                        <segue destination="2rL-0H-rs5" kind="relationship" relationship="window.shadowedContentViewController" id="iRx-CO-PsU"/>
+                    </connections>
+                </windowController>
+                <customObject id="rZU-aM-mGr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="595.5" y="235.5"/>
+        </scene>
+        <!--Override Video Controller-->
+        <scene sceneID="MKI-am-j8O">
+            <objects>
+                <viewController id="2rL-0H-rs5" customClass="OverrideVideoController" customModule="MOSSO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="rWv-ro-5TI">
+                        <rect key="frame" x="0.0" y="0.0" width="193" height="123"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eMs-FO-NVf">
+                                <rect key="frame" x="4" y="97" width="185" height="20"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Custom Show Open Override" id="Jdv-3E-pvS">
+                                    <font key="font" size="13" name="HelveticaNeue-Bold"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="i4C-5a-wBU">
+                                <rect key="frame" x="0.0" y="63" width="87" height="32"/>
+                                <buttonCell key="cell" type="push" title="Browse" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SOZ-Gc-JSX">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="browsePressed:" target="2rL-0H-rs5" id="yh6-wp-NEU"/>
+                                </connections>
+                            </button>
+                            <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gYt-5m-wO1">
+                                <rect key="frame" x="6" y="6" width="175" height="58"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                <size key="cellSize" width="175" height="18"/>
+                                <size key="intercellSpacing" width="4" height="2"/>
+                                <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="w33-1b-etI">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <cells>
+                                    <column>
+                                        <buttonCell type="radio" title="Play random 30 seconds" imagePosition="left" alignment="left" state="on" tag="1" inset="2" id="hFj-XE-ZkI">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <buttonCell type="radio" title="Play first 30 seconds" imagePosition="left" alignment="left" tag="2" inset="2" id="FJF-YN-jgw">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <buttonCell type="radio" title="Play entire clip" imagePosition="left" alignment="left" tag="3" inset="2" id="qF5-GU-rTU">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </column>
+                                </cells>
+                                <connections>
+                                    <action selector="radioChanged:" target="2rL-0H-rs5" id="BJt-dW-OxQ"/>
+                                </connections>
+                            </matrix>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OO6-zp-Mrl">
+                                <rect key="frame" x="80" y="74" width="66" height="13"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Not selected" id="vz2-5d-dcJ">
+                                    <font key="font" metaFont="label"/>
+                                    <color key="textColor" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="OO6-zp-Mrl" firstAttribute="leading" secondItem="i4C-5a-wBU" secondAttribute="trailing" constant="1" id="CGC-mz-vkN"/>
+                            <constraint firstItem="i4C-5a-wBU" firstAttribute="top" secondItem="eMs-FO-NVf" secondAttribute="bottom" constant="6" id="F7I-OC-YAW"/>
+                            <constraint firstItem="eMs-FO-NVf" firstAttribute="top" secondItem="rWv-ro-5TI" secondAttribute="top" constant="6" id="GII-rN-QwA"/>
+                            <constraint firstItem="gYt-5m-wO1" firstAttribute="leading" secondItem="rWv-ro-5TI" secondAttribute="leading" constant="6" id="Gkh-23-uKZ"/>
+                            <constraint firstAttribute="bottom" secondItem="gYt-5m-wO1" secondAttribute="bottom" constant="6" id="KUY-gA-rH8"/>
+                            <constraint firstItem="gYt-5m-wO1" firstAttribute="top" secondItem="i4C-5a-wBU" secondAttribute="bottom" constant="6" id="a4O-Bu-uM9"/>
+                            <constraint firstItem="i4C-5a-wBU" firstAttribute="leading" secondItem="rWv-ro-5TI" secondAttribute="leading" constant="6" id="dud-Lp-D89"/>
+                            <constraint firstAttribute="trailing" secondItem="eMs-FO-NVf" secondAttribute="trailing" constant="6" id="j0V-5b-6zz"/>
+                            <constraint firstItem="eMs-FO-NVf" firstAttribute="leading" secondItem="rWv-ro-5TI" secondAttribute="leading" constant="6" id="n4o-cm-xcP"/>
+                            <constraint firstItem="OO6-zp-Mrl" firstAttribute="centerY" secondItem="i4C-5a-wBU" secondAttribute="centerY" id="xGs-ac-ySL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="radio" destination="gYt-5m-wO1" id="QWb-lR-dLK"/>
+                        <outlet property="selectionLabel" destination="OO6-zp-Mrl" id="kvy-oY-7mL"/>
+                    </connections>
+                </viewController>
+                <customObject id="dd0-pp-s18" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="595.5" y="469.5"/>
         </scene>
     </scenes>
     <resources>
         <image name="Moment of Silence Generator" width="245.75999450683594" height="245.75999450683594"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="CkY-0s-hda"/>
+    </inferredMetricsTieBreakers>
 </document>
