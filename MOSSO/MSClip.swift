@@ -54,6 +54,11 @@ class MSClip {
     
     
     func buildInstruction(composition : AVMutableComposition) -> AVMutableVideoCompositionLayerInstruction {
+        return buildInstruction(composition, selectedTimeRange: CMTimeRangeMake(kCMTimeZero, asset.duration))
+    }
+    
+    
+    func buildInstruction(composition: AVMutableComposition, selectedTimeRange: CMTimeRange) -> AVMutableVideoCompositionLayerInstruction {
         let track = composition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: 1)
         
         let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
@@ -62,7 +67,7 @@ class MSClip {
             layerInstruction.setOpacityRampFromStartOpacity(0, toEndOpacity: 1, timeRange:CMTimeRangeMake(startTime, kMSFadeLength))
         }
         
-        track.insertTimeRange(CMTimeRangeMake(kCMTimeZero, asset.duration), ofTrack: asset.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack, atTime: startTime, error: nil)
+        track.insertTimeRange(selectedTimeRange, ofTrack: asset.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack, atTime: startTime, error: nil)
         
         if includeSound {
             if let assetSound = asset.tracksWithMediaType(AVMediaTypeAudio)[0] as? AVAssetTrack {

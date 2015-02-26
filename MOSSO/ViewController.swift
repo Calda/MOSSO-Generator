@@ -89,8 +89,15 @@ class ViewController: NSViewController {
             
             let queueClip = MSClip(asset: queuePath, startTime: nextClipStart, fadeIn: !isLastClip && !isFirstClip, includeSound: isFirstClip || isLastClip)
             nextClipStart = queueClip.nextClipStart
-            let layerInstruction = queueClip.buildInstruction(mixComposition)
-            layerInstructions.append(layerInstruction)
+            
+            if isFirstClip {
+                let layerInstruction = queueClip.buildInstruction(mixComposition, selectedTimeRange: getShowOpenTimeRange(queueClip))
+                layerInstructions.append(layerInstruction)
+            } else {
+                let layerInstruction = queueClip.buildInstruction(mixComposition)
+                layerInstructions.append(layerInstruction)
+            }
+            
             
             if isLastClip {
                 mixLength = queueClip.fadeOutEnd
@@ -273,7 +280,6 @@ class ViewController: NSViewController {
             if possibleNewDuration < CMTimeMake(37, 1) { //will not go over 37s
                 clipQueue.append(clipAsset)
                 currentDuration = possibleNewDuration
-                println(currentDuration)
             }
             clips.removeAtIndex(clipIndex)
             if possibleNewDuration > CMTimeMake(32, 1) || clips.count == 0 { //video is 32s or out of clips
@@ -303,6 +309,9 @@ class ViewController: NSViewController {
     
     
     func chooseShowOpen(showOpenFolder: String) -> AVAsset? {
+        if let override = showOpenOverride {
+            return override
+        }
         var showOpens : [(path: String, lots: Int)] = []
         if let enumerator = fileManager.enumeratorAtPath(showOpenFolder) {
             while let file = enumerator.nextObject() as? String {
@@ -342,6 +351,25 @@ class ViewController: NSViewController {
             }
         }
         return nil
+    }
+    
+    
+    func getShowOpenTimeRange(clip: MSClip) -> CMTimeRange {
+        if showOpenOverride != nil {
+            let duration = CGFloat(CMTimeGetSeconds(clip.asset.duration))
+            if duration >= 30 {
+                if overrideSetting == .First30 {
+                    return CMTimeRangeMake(kCMTimeZero, CMTimeMake(30, 1))
+                } else if overrideSetting == .Random30 {
+                    let randomTime = random(min: 0, max: duration - 30)
+                    let startTime = CMTimeMakeWithSeconds(Float64(randomTime), 9999)
+                    let endTime = CMTimeMakeWithSeconds(Float64(randomTime + 30), 9999)
+                    return CMTimeRangeMake(startTime, endTime)
+                }
+                // overrideSetting == .All is the default (below)
+            }
+        }
+        return CMTimeRangeMake(kCMTimeZero, clip.asset.duration)
     }
     
     
