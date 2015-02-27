@@ -66,13 +66,12 @@ class MSClip {
         if fadeIn {
             layerInstruction.setOpacityRampFromStartOpacity(0, toEndOpacity: 1, timeRange:CMTimeRangeMake(startTime, kMSFadeLength))
         }
-        
         track.insertTimeRange(selectedTimeRange, ofTrack: asset.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack, atTime: startTime, error: nil)
         
         if includeSound {
             if let assetSound = asset.tracksWithMediaType(AVMediaTypeAudio)[0] as? AVAssetTrack {
                 let soundtrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: 1)
-                soundtrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, asset.duration), ofTrack: assetSound, atTime: startTime, error: nil)
+                soundtrack.insertTimeRange(selectedTimeRange, ofTrack: assetSound, atTime: startTime, error: nil)
             }
         }
         

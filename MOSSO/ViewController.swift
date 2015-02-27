@@ -54,14 +54,6 @@ class ViewController: NSViewController {
     
     
     func generateVideo() {
-        let testPath = (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String).stringByAppendingPathComponent("/MOSSO/ SHOW OPEN")
-        for i in 0...1000 {
-            let desktopPath = NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)[0] as String
-            if chooseShowOpen(testPath) == nil {
-                println("nil :(")
-            }
-        }
-        
         //delete previous file
         let desktopPath = NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)[0] as String
         let fileURL = NSURL.fileURLWithPath(desktopPath.stringByAppendingPathComponent("/Generated MOSSO.mov"))
@@ -83,15 +75,17 @@ class ViewController: NSViewController {
             titleTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, titleClip.duration), ofTrack: titleClip.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack, atTime: titleStartTime, error: nil)
         }
         
-        for queuePath in clipQueue {
-            let isFirstClip = (queuePath == clipQueue.first!)
-            let isLastClip = (queuePath == clipQueue.last!)
+        for queuedAsset in clipQueue {
+            let isFirstClip = (queuedAsset == clipQueue.first!)
+            let isLastClip = (queuedAsset == clipQueue.last!)
+            println((queuedAsset as AVURLAsset).URL)
             
-            let queueClip = MSClip(asset: queuePath, startTime: nextClipStart, fadeIn: !isLastClip && !isFirstClip, includeSound: isFirstClip || isLastClip)
+            let queueClip = MSClip(asset: queuedAsset, startTime: nextClipStart, fadeIn: !isLastClip && !isFirstClip, includeSound: isFirstClip || isLastClip)
             nextClipStart = queueClip.nextClipStart
             
-            if isFirstClip {
-                let layerInstruction = queueClip.buildInstruction(mixComposition, selectedTimeRange: getShowOpenTimeRange(queueClip))
+            if isLastClip {
+                let timeRange = getShowOpenTimeRange(queueClip)
+                let layerInstruction = queueClip.buildInstruction(mixComposition, selectedTimeRange: timeRange)
                 layerInstructions.append(layerInstruction)
             } else {
                 let layerInstruction = queueClip.buildInstruction(mixComposition)
@@ -226,7 +220,7 @@ class ViewController: NSViewController {
         exporter.exportAsynchronouslyWithCompletionHandler({
             dispatch_async(dispatch_get_main_queue(), {
                 self.showMessage("Export Complete. Opening MOSSO...")
-                self.delay(1.5) {
+                self.delay(2) {
                     while !self.fileManager.fileExistsAtPath(fileURL!.path!) { }
                     NSWorkspace.sharedWorkspace().openFile(fileURL!.path!)
                     NSApplication.sharedApplication().terminate(self)
@@ -310,6 +304,7 @@ class ViewController: NSViewController {
     
     func chooseShowOpen(showOpenFolder: String) -> AVAsset? {
         if let override = showOpenOverride {
+            let duration = CGFloat(CMTimeGetSeconds(override.duration))
             return override
         }
         var showOpens : [(path: String, lots: Int)] = []
@@ -355,7 +350,7 @@ class ViewController: NSViewController {
     
     
     func getShowOpenTimeRange(clip: MSClip) -> CMTimeRange {
-        if showOpenOverride != nil {
+        if showOpenOverride != nil && showOpenOverride! == clip.asset {
             let duration = CGFloat(CMTimeGetSeconds(clip.asset.duration))
             if duration >= 30 {
                 if overrideSetting == .First30 {
@@ -363,8 +358,7 @@ class ViewController: NSViewController {
                 } else if overrideSetting == .Random30 {
                     let randomTime = random(min: 0, max: duration - 30)
                     let startTime = CMTimeMakeWithSeconds(Float64(randomTime), 9999)
-                    let endTime = CMTimeMakeWithSeconds(Float64(randomTime + 30), 9999)
-                    return CMTimeRangeMake(startTime, endTime)
+                    return CMTimeRangeMake(startTime, CMTimeMake(30, 1))
                 }
                 // overrideSetting == .All is the default (below)
             }
