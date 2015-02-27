@@ -33,19 +33,43 @@ class OverrideVideoController : NSViewController {
                     if let fileName = url.lastPathComponent {
                         let display = (fileName as NSString).substringToIndex(countElements(fileName) - 4)
                         selectionLabel.stringValue = display
+                        selectionLabel.textColor = NSColor(calibratedRed: 0.1, green: 0.5, blue: 0.1, alpha: 1)
                     }
                 }
             }
         }
     }
     
+    
     @IBAction func radioChanged(sender: NSMatrix) {
         if let mosso = mosso {
             switch(sender.selectedTag()) {
-                case 2: mosso.overrideSetting = .First30
+                case 2: mosso.overrideSetting = .First40
                 case 3: mosso.overrideSetting = .All
-                default: mosso.overrideSetting = .Random30
+                default: mosso.overrideSetting = .Random40
             }
+        }
+    }
+    
+    //reset view to already existing settings
+    override func viewWillAppear() {
+        
+        if let mosso = mosso {
+            var id : Int
+            switch(mosso.overrideSetting) {
+                case .First40 : id = 2
+                case .All : id = 3
+                default: id = 0
+            }
+            radio.selectCellWithTag(id)
+            
+            if let selectedOverride = mosso.showOpenOverride as? AVURLAsset {
+                let URL = selectedOverride.URL.path!.lastPathComponent
+                let display = (URL as NSString).substringToIndex(countElements(URL) - 4)
+                selectionLabel.stringValue = display
+                selectionLabel.textColor = NSColor(calibratedRed: 0.1, green: 0.5, blue: 0.1, alpha: 1)
+            }
+            
         }
     }
     

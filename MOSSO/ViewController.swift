@@ -23,10 +23,10 @@ class ViewController: NSViewController {
     @IBOutlet weak var icon: NSImageView!
     
     var showOpenOverride : AVAsset?
-    var overrideSetting : OverrideSetting = .Random30
+    var overrideSetting : OverrideSetting = .Random40
     
     enum OverrideSetting {
-        case Random30, First30, All
+        case Random40, First40, All
     }
     
     override func viewDidLoad() {
@@ -78,7 +78,6 @@ class ViewController: NSViewController {
         for queuedAsset in clipQueue {
             let isFirstClip = (queuedAsset == clipQueue.first!)
             let isLastClip = (queuedAsset == clipQueue.last!)
-            println((queuedAsset as AVURLAsset).URL)
             
             let queueClip = MSClip(asset: queuedAsset, startTime: nextClipStart, fadeIn: !isLastClip && !isFirstClip, includeSound: isFirstClip || isLastClip)
             nextClipStart = queueClip.nextClipStart
@@ -97,6 +96,7 @@ class ViewController: NSViewController {
                 mixLength = queueClip.fadeOutEnd
             }
         }
+        
         
         var flavorTexts = [
             "Evaluating shot composition",
@@ -352,13 +352,13 @@ class ViewController: NSViewController {
     func getShowOpenTimeRange(clip: MSClip) -> CMTimeRange {
         if showOpenOverride != nil && showOpenOverride! == clip.asset {
             let duration = CGFloat(CMTimeGetSeconds(clip.asset.duration))
-            if duration >= 30 {
-                if overrideSetting == .First30 {
-                    return CMTimeRangeMake(kCMTimeZero, CMTimeMake(30, 1))
-                } else if overrideSetting == .Random30 {
-                    let randomTime = random(min: 0, max: duration - 30)
+            if duration >= 40 {
+                if overrideSetting == .First40 {
+                    return CMTimeRangeMake(kCMTimeZero, CMTimeMake(40, 1))
+                } else if overrideSetting == .Random40 {
+                    let randomTime = random(min: 0, max: duration - 40)
                     let startTime = CMTimeMakeWithSeconds(Float64(randomTime), 9999)
-                    return CMTimeRangeMake(startTime, CMTimeMake(30, 1))
+                    return CMTimeRangeMake(startTime, CMTimeMake(40, 1))
                 }
                 // overrideSetting == .All is the default (below)
             }
