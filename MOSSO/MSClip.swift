@@ -54,25 +54,48 @@ class MSClip {
     
     
     func buildInstruction(composition : AVMutableComposition) -> AVMutableVideoCompositionLayerInstruction {
-        return buildInstruction(composition, selectedTimeRange: CMTimeRangeMake(kCMTimeZero, asset.duration))
+        return buildInstruction(composition: composition, selectedTimeRange: [CMTimeRangeMake(kCMTimeZero, asset.duration)])
     }
     
     
-    func buildInstruction(composition: AVMutableComposition, selectedTimeRange: CMTimeRange) -> AVMutableVideoCompositionLayerInstruction {
+    func buildInstruction(#composition: AVMutableComposition, selectedTimeRange: [CMTimeRange]) -> AVMutableVideoCompositionLayerInstruction {
         let track = composition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: 1)
         
         let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
         layerInstruction.setOpacityRampFromStartOpacity(1, toEndOpacity: 0, timeRange:CMTimeRangeMake(fadeOutStart, kMSFadeLength))
         if fadeIn {
             layerInstruction.setOpacityRampFromStartOpacity(0, toEndOpacity: 1, timeRange:CMTimeRangeMake(startTime, kMSFadeLength))
+            
         }
-        track.insertTimeRange(selectedTimeRange, ofTrack: asset.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack, atTime: startTime, error: nil)
         
-        if includeSound {
-            if let assetSound = asset.tracksWithMediaType(AVMediaTypeAudio)[0] as? AVAssetTrack {
-                let soundtrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: 1)
-                soundtrack.insertTimeRange(selectedTimeRange, ofTrack: assetSound, atTime: startTime, error: nil)
+        for timeRange in selectedTimeRange {
+            track.insertTimeRange(timeRange, ofTrack: asset.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack, atTime: startTime, error: nil)
+            
+            if includeSound {
+                if let assetSound = asset.tracksWithMediaType(AVMediaTypeAudio)[0] as? AVAssetTrack {
+                    let soundtrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: 1)
+                    soundtrack.insertTimeRange(timeRange, ofTrack: assetSound, atTime: startTime, error: nil)
+                    let soundtrackInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: soundtrack)
+                }
             }
+        }
+        
+        let naturalSize = track.naturalSize
+        let preferred = track.preferredTransform
+        let rect = CGRect(origin: CGPointMake(0,0), size: naturalSize)
+        let actualSize = CGRectApplyAffineTransform(rect, preferred).size
+        let exportSize = CGSizeMake(720, 480)
+        if actualSize != exportSize {
+            ViewController.Static.needsMultiplePasses = true
+            let fixedWidth : CGFloat = exportSize.width
+            let fixedHeight = (fixedWidth / actualSize.width) * actualSize.height
+            let scaleFactor = (fixedWidth / actualSize.width)
+            let scaleTransform = CGAffineTransformMakeScale(scaleFactor, scaleFactor)
+            
+            let yOffset = (exportSize.height - fixedHeight)
+            let letterbox = CGAffineTransformTranslate(scaleTransform, 0, yOffset/2 * (1/scaleFactor))
+            
+            layerInstruction.setTransform(letterbox, atTime: kCMTimeZero)
         }
         
         return layerInstruction

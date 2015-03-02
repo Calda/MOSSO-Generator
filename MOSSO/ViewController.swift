@@ -14,6 +14,10 @@ import Quartz
 
 class ViewController: NSViewController {
 
+    struct Static {
+        static var needsMultiplePasses = false
+    }
+    
     let fileManager = NSFileManager.defaultManager()
     let editor = AVMutableVideoComposition()
     @IBOutlet weak var outputText: NSTextField!
@@ -23,10 +27,10 @@ class ViewController: NSViewController {
     @IBOutlet weak var icon: NSImageView!
     
     var showOpenOverride : AVAsset?
-    var overrideSetting : OverrideSetting = .Random40
+    var overrideSetting : OverrideSetting = .Random40Cuts
     
     enum OverrideSetting {
-        case Random40, First40, All
+        case Random40Cuts, Random40Consecutive, First40, All
     }
     
     override func viewDidLoad() {
@@ -83,8 +87,8 @@ class ViewController: NSViewController {
             nextClipStart = queueClip.nextClipStart
             
             if isLastClip {
-                let timeRange = getShowOpenTimeRange(queueClip)
-                let layerInstruction = queueClip.buildInstruction(mixComposition, selectedTimeRange: timeRange)
+                let timeRanges = getShowOpenTimeRanges(queueClip)
+                let layerInstruction = queueClip.buildInstruction(composition: mixComposition, selectedTimeRange: timeRanges)
                 layerInstructions.append(layerInstruction)
             } else {
                 let layerInstruction = queueClip.buildInstruction(mixComposition)
@@ -118,7 +122,7 @@ class ViewController: NSViewController {
             "Creating a better MOSSO than Hennessy ever could",
             "MOSSO escaping from Alcatraz",
             "Raising a child and naming it MOSSO",
-            "Color correcting to intergalactic broadcast standards",
+            "Conforming to intergalactic broadcast standards",
             "Sending video drones to record last minute clips",
             "Dividing by zero",
             "Subtracting points from show grade",
@@ -139,7 +143,7 @@ class ViewController: NSViewController {
             "Making a show better than local news",
             "Broadcasting onto WJBF",
             "Hacking News Channel 6",
-            "Electing Hennessy Supreme Commander of Augusta",
+            "Electing Hennessy Supreme Commander of something",
             "Force quitting MOSSO Generator",
             "Initiating kernel panic",
             "Using all 200% of the processor",
@@ -149,7 +153,7 @@ class ViewController: NSViewController {
             "Making up technical jargon",
             "Filing $150,000 purchase order",
             "Requesting that Apple make MOSSO Generator a bundled app on OS X",
-            "Releasing OS XI: Hennessy (theme: infamous men)",
+            "Releasing OS XI: Hennessy",
             "Waiting in line to buy Windows 95",
             "Upgrading to Snow Leopard",
             "Installing Windows Vista in boot camp",
@@ -179,6 +183,25 @@ class ViewController: NSViewController {
             "MOSSO Generator is typing",
             "Telling another useless story",
             "MOSSO Generator: Funny jokes since 2015",
+            "Generating a new Cohost",
+            "Inventing world news",
+            "Reading announcements",
+            "Brainwashing the herd--erm.. students",
+            "Take notes",
+            "There will be a test",
+            "Generating new dog names",
+            "Building the next-gen iMac",
+            "Reading announcements",
+            "Writing fake announements",
+            "Producing a 1-hour special",
+            "Generating an 8 minute MOSSO",
+            "Do you rrally trust me with your show grade?",
+            "Setting show grade to -34",
+            "Sabatoging something",
+            "Your lucky numbers are 4 8 15 16 23 42",
+            "github.com/calda/MOSSO-Generator",
+            "Announcing Final Cut Pro 11",
+            "Replacing Final Cut with Windows Movie Maker",
         ]
         
         for _ in 0...10 { //shuffle
@@ -217,6 +240,7 @@ class ViewController: NSViewController {
         exporter.outputURL = fileURL
         exporter.videoComposition = mainCompositionInst
         exporter.outputFileType = AVFileTypeQuickTimeMovie
+        exporter.canPerformMultiplePassesOverSourceMediaData = ViewController.Static.needsMultiplePasses
         exporter.exportAsynchronouslyWithCompletionHandler({
             dispatch_async(dispatch_get_main_queue(), {
                 self.showMessage("Export Complete. Opening MOSSO...")
@@ -349,21 +373,31 @@ class ViewController: NSViewController {
     }
     
     
-    func getShowOpenTimeRange(clip: MSClip) -> CMTimeRange {
+    func getShowOpenTimeRanges(clip: MSClip) -> [CMTimeRange] {
         if showOpenOverride != nil && showOpenOverride! == clip.asset {
             let duration = CGFloat(CMTimeGetSeconds(clip.asset.duration))
             if duration >= 40 {
                 if overrideSetting == .First40 {
-                    return CMTimeRangeMake(kCMTimeZero, CMTimeMake(40, 1))
-                } else if overrideSetting == .Random40 {
-                    let randomTime = random(min: 0, max: duration - 40)
-                    let startTime = CMTimeMakeWithSeconds(Float64(randomTime), 9999)
-                    return CMTimeRangeMake(startTime, CMTimeMake(40, 1))
+                    return [CMTimeRangeMake(kCMTimeZero, CMTimeMake(40, 1))]
+                } else if overrideSetting == .Random40Consecutive {
+                    return [createRandomRange(assetDuration: duration, rangeDuration: 40.0)]
+                } else if overrideSetting == .Random40Cuts {
+                    let cut1 = createRandomRange(assetDuration: duration, rangeDuration: 10.0)
+                    let cut2 = createRandomRange(assetDuration: duration, rangeDuration: 10.0)
+                    let cut3 = createRandomRange(assetDuration: duration, rangeDuration: 20.0)
+                    return [cut1, cut2, cut3]
                 }
                 // overrideSetting == .All is the default (below)
             }
         }
-        return CMTimeRangeMake(kCMTimeZero, clip.asset.duration)
+        return [CMTimeRangeMake(kCMTimeZero, clip.asset.duration)]
+    }
+    
+    
+    func createRandomRange(#assetDuration: CGFloat, rangeDuration: CGFloat) -> CMTimeRange {
+        let randomTime = random(min: 0, max: assetDuration - rangeDuration)
+        let startTime = CMTimeMakeWithSeconds(Float64(randomTime), 9999)
+        return CMTimeRangeMake(startTime, CMTimeMakeWithSeconds(Float64(rangeDuration), 9999))
     }
     
     

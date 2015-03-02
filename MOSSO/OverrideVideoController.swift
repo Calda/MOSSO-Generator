@@ -44,9 +44,10 @@ class OverrideVideoController : NSViewController {
     @IBAction func radioChanged(sender: NSMatrix) {
         if let mosso = mosso {
             switch(sender.selectedTag()) {
-                case 2: mosso.overrideSetting = .First40
-                case 3: mosso.overrideSetting = .All
-                default: mosso.overrideSetting = .Random40
+                case 2: mosso.overrideSetting = .Random40Consecutive
+                case 3: mosso.overrideSetting = .First40
+                case 4: mosso.overrideSetting = .All
+                default: mosso.overrideSetting = .Random40Cuts
             }
         }
     }
@@ -57,8 +58,9 @@ class OverrideVideoController : NSViewController {
         if let mosso = mosso {
             var id : Int
             switch(mosso.overrideSetting) {
-                case .First40 : id = 2
-                case .All : id = 3
+                case .Random40Consecutive : id = 2
+                case .First40 : id = 3
+                case .All : id = 4
                 default: id = 0
             }
             radio.selectCellWithTag(id)
