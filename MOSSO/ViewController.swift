@@ -197,7 +197,7 @@ class ViewController: NSViewController {
             "Generating an 8 minute MOSSO",
             "Do you rrally trust me with your show grade?",
             "Setting show grade to -34",
-            "Sabatoging something",
+            "Sabotaging something",
             "Your lucky numbers are 4 8 15 16 23 42",
             "github.com/calda/MOSSO-Generator",
             "Announcing Final Cut Pro 11",
