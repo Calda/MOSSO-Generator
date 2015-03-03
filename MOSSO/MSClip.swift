@@ -68,16 +68,20 @@ class MSClip {
             
         }
         
+        var nextSelectionStart = startTime
+
         for timeRange in selectedTimeRange {
-            track.insertTimeRange(timeRange, ofTrack: asset.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack, atTime: startTime, error: nil)
+            track.insertTimeRange(timeRange, ofTrack: asset.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack, atTime: nextSelectionStart, error: nil)
             
             if includeSound {
                 if let assetSound = asset.tracksWithMediaType(AVMediaTypeAudio)[0] as? AVAssetTrack {
                     let soundtrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: 1)
-                    soundtrack.insertTimeRange(timeRange, ofTrack: assetSound, atTime: startTime, error: nil)
+                    soundtrack.insertTimeRange(timeRange, ofTrack: assetSound, atTime: nextSelectionStart, error: nil)
                     let soundtrackInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: soundtrack)
                 }
             }
+            
+            nextSelectionStart = CMTimeAdd(nextSelectionStart, timeRange.duration)
         }
         
         let naturalSize = track.naturalSize
