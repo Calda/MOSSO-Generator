@@ -195,7 +195,7 @@ class ViewController: NSViewController {
             "Writing fake announements",
             "Producing a 1-hour special",
             "Generating an 8 minute MOSSO",
-            "Do you rrally trust me with your show grade?",
+            "Do you really trust me with your show grade?",
             "Setting show grade to -34",
             "Sabotaging something",
             "Your lucky numbers are 4 8 15 16 23 42",
