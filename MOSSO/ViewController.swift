@@ -30,7 +30,7 @@ class ViewController: NSViewController {
     var overrideSetting : OverrideSetting = .Random40Cuts
     
     enum OverrideSetting {
-        case Random40Cuts, Random40Consecutive, First40, All
+        case Random40Cuts, Random40Consecutive, First40, All, None
     }
     
     override func viewDidLoad() {
@@ -45,7 +45,7 @@ class ViewController: NSViewController {
     
     @IBAction func generateButtonClicked(sender: NSButton) {
         sender.enabled = false
-        sender.stringValue = "Generating..."
+        sender.stringValue = "Generating clip queue..."
         sender.animator().alphaValue = 0
         NSAnimationContext.runAnimationGroup({ context in
             context.duration = 1.0
@@ -88,7 +88,7 @@ class ViewController: NSViewController {
             
             if isLastClip {
                 let timeRanges = getShowOpenTimeRanges(queueClip)
-                let layerInstruction = queueClip.buildInstruction(composition: mixComposition, selectedTimeRange: timeRanges)
+                let layerInstruction = queueClip.buildInstruction(composition: mixComposition, selectedTimeRange: timeRanges, hideClip: overrideSetting == .None)
                 layerInstructions.append(layerInstruction)
             } else {
                 let layerInstruction = queueClip.buildInstruction(mixComposition)
@@ -202,6 +202,14 @@ class ViewController: NSViewController {
             "github.com/calda/MOSSO-Generator",
             "Announcing Final Cut Pro 11",
             "Replacing Final Cut with Windows Movie Maker",
+            "Deleting system32",
+            "Creating the next hit meme",
+            "Inverting colors",
+            "Applying Sepia filter",
+            "Applying gaussian blur",
+            "Raising dB above -12",
+            "Loading Hennessy Memes",
+            "Greetings from March 2015"
         ]
         
         for _ in 0...10 { //shuffle
@@ -228,7 +236,7 @@ class ViewController: NSViewController {
         }
         
         let mainInstruction = AVMutableVideoCompositionInstruction()
-        mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, mixLength)
+        mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeAdd(mixLength, CMTimeMake(10,1)))
         mainInstruction.layerInstructions = layerInstructions
         
         let mainCompositionInst = AVMutableVideoComposition(propertiesOfAsset: mixComposition)
@@ -395,7 +403,9 @@ class ViewController: NSViewController {
     
     
     func createRandomRange(#assetDuration: CGFloat, rangeDuration: CGFloat) -> CMTimeRange {
-        let randomTime = random(min: 0, max: assetDuration - rangeDuration)
+        let quartile1 = assetDuration * 0.25
+        let quartile3 = assetDuration * 0.75
+        let randomTime = random(min: quartile1, max: quartile3)
         let startTime = CMTimeMakeWithSeconds(Float64(randomTime), 9999)
         return CMTimeRangeMake(startTime, CMTimeMakeWithSeconds(Float64(rangeDuration), 9999))
     }

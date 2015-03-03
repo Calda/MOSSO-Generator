@@ -596,11 +596,11 @@
             <objects>
                 <viewController id="2rL-0H-rs5" customClass="OverrideVideoController" customModule="MOSSO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="rWv-ro-5TI">
-                        <rect key="frame" x="0.0" y="0.0" width="284" height="143"/>
+                        <rect key="frame" x="0.0" y="0.0" width="284" height="173"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eMs-FO-NVf">
-                                <rect key="frame" x="4" y="117" width="276" height="20"/>
+                                <rect key="frame" x="4" y="147" width="276" height="20"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Custom Show Open Override" id="Jdv-3E-pvS">
                                     <font key="font" size="13" name="HelveticaNeue-Bold"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -608,7 +608,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="i4C-5a-wBU">
-                                <rect key="frame" x="0.0" y="83" width="87" height="32"/>
+                                <rect key="frame" x="0.0" y="113" width="87" height="32"/>
                                 <buttonCell key="cell" type="push" title="Browse" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SOZ-Gc-JSX">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -618,7 +618,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OO6-zp-Mrl">
-                                <rect key="frame" x="80" y="94" width="66" height="13"/>
+                                <rect key="frame" x="80" y="124" width="66" height="13"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Not selected" id="vz2-5d-dcJ">
                                     <font key="font" metaFont="label"/>
                                     <color key="textColor" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
@@ -626,9 +626,9 @@
                                 </textFieldCell>
                             </textField>
                             <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gYt-5m-wO1">
-                                <rect key="frame" x="6" y="6" width="258" height="78"/>
+                                <rect key="frame" x="6" y="6" width="258" height="108"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                <size key="cellSize" width="258" height="18"/>
+                                <size key="cellSize" width="258" height="20"/>
                                 <size key="intercellSpacing" width="4" height="2"/>
                                 <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="w33-1b-etI">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -651,6 +651,10 @@
                                         <buttonCell type="radio" title="Use entire clip" imagePosition="left" alignment="left" tag="4" inset="2" id="8cI-ZJ-FQS">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <buttonCell type="radio" title="Disable Show Open" imagePosition="left" alignment="left" tag="5" inset="2" id="e5c-FD-dQ7">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" size="13" name="HelveticaNeue-Bold"/>
                                         </buttonCell>
                                     </column>
                                 </cells>
@@ -679,7 +683,7 @@
                 </viewController>
                 <customObject id="dd0-pp-s18" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="641" y="476.5"/>
+            <point key="canvasLocation" x="641" y="486.5"/>
         </scene>
     </scenes>
     <resources>

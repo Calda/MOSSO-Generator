@@ -58,7 +58,7 @@ class MSClip {
     }
     
     
-    func buildInstruction(#composition: AVMutableComposition, selectedTimeRange: [CMTimeRange]) -> AVMutableVideoCompositionLayerInstruction {
+    func buildInstruction(#composition: AVMutableComposition, selectedTimeRange: [CMTimeRange], hideClip: Bool = false) -> AVMutableVideoCompositionLayerInstruction {
         let track = composition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: 1)
         
         let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
@@ -73,7 +73,7 @@ class MSClip {
         for timeRange in selectedTimeRange {
             track.insertTimeRange(timeRange, ofTrack: asset.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack, atTime: nextSelectionStart, error: nil)
             
-            if includeSound {
+            if includeSound && !hideClip {
                 if let assetSound = asset.tracksWithMediaType(AVMediaTypeAudio)[0] as? AVAssetTrack {
                     let soundtrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio, preferredTrackID: 1)
                     soundtrack.insertTimeRange(timeRange, ofTrack: assetSound, atTime: nextSelectionStart, error: nil)
@@ -100,6 +100,10 @@ class MSClip {
             let letterbox = CGAffineTransformTranslate(scaleTransform, 0, yOffset/2 * (1/scaleFactor))
             
             layerInstruction.setTransform(letterbox, atTime: kCMTimeZero)
+        }
+        
+        if hideClip {
+            layerInstruction.setOpacity(0, atTime: startTime)
         }
         
         return layerInstruction
