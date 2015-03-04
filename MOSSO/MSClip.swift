@@ -71,7 +71,7 @@ class MSClip {
         var nextSelectionStart = startTime
 
         for timeRange in selectedTimeRange {
-            track.insertTimeRange(timeRange, ofTrack: asset.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack, atTime: nextSelectionStart, error: nil)
+            track.insertTimeRange(timeRange, ofTrack: asset.tracksWithMediaType(AVMediaTypeVideo)[0] as! AVAssetTrack, atTime: nextSelectionStart, error: nil)
             
             if includeSound && !hideClip {
                 if let assetSound = asset.tracksWithMediaType(AVMediaTypeAudio)[0] as? AVAssetTrack {

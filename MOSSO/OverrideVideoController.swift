@@ -28,10 +28,10 @@ class OverrideVideoController : NSViewController {
         if clicked == NSOKButton {
             if let url = open.URL {
                 if let mosso = self.mosso {
-                    let overrideAsset = AVAsset.assetWithURL(url) as AVAsset
+                    let overrideAsset = AVAsset.assetWithURL(url) as! AVAsset
                     mosso.showOpenOverride = overrideAsset
                     if let fileName = url.lastPathComponent {
-                        let display = (fileName as NSString).substringToIndex(countElements(fileName) - 4)
+                        let display = (fileName as NSString).substringToIndex(count(fileName) - 4)
                         selectionLabel.stringValue = display
                         selectionLabel.textColor = NSColor(calibratedRed: 0.1, green: 0.5, blue: 0.1, alpha: 1)
                     }
@@ -69,7 +69,7 @@ class OverrideVideoController : NSViewController {
             
             if let selectedOverride = mosso.showOpenOverride as? AVURLAsset {
                 let URL = selectedOverride.URL.path!.lastPathComponent
-                let display = (URL as NSString).substringToIndex(countElements(URL) - 4)
+                let display = (URL as NSString).substringToIndex(count(URL) - 4)
                 selectionLabel.stringValue = display
                 selectionLabel.textColor = NSColor(calibratedRed: 0.1, green: 0.5, blue: 0.1, alpha: 1)
             }

@@ -44,6 +44,12 @@ class ViewController: NSViewController {
     
     
     @IBAction func generateButtonClicked(sender: NSButton) {
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .AllDomainsMask, true) as? [String]
+        let path = dirs![0].stringByAppendingPathComponent("/MOSSO")
+        if !fileManager.fileExistsAtPath(path, isDirectory: nil) {
+            showMessage("Folder not found (Documents/MOSSO)")
+            return
+        }
         sender.enabled = false
         sender.stringValue = "Generating clip queue..."
         sender.animator().alphaValue = 0
@@ -59,7 +65,7 @@ class ViewController: NSViewController {
     
     func generateVideo() {
         //delete previous file
-        let desktopPath = NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)[0] as String
+        let desktopPath = NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)[0] as! String
         let fileURL = NSURL.fileURLWithPath(desktopPath.stringByAppendingPathComponent("/Generated MOSSO.mov"))
         var error:NSError?
         NSFileManager.defaultManager().removeItemAtPath(fileURL!.path!, error: &error)
@@ -76,7 +82,7 @@ class ViewController: NSViewController {
             let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: titleTrack)
             instruction.setOpacity(1.0, atTime: titleStartTime)
             layerInstructions.append(instruction)
-            titleTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, titleClip.duration), ofTrack: titleClip.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack, atTime: titleStartTime, error: nil)
+            titleTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, titleClip.duration), ofTrack: titleClip.tracksWithMediaType(AVMediaTypeVideo)[0] as! AVAssetTrack, atTime: titleStartTime, error: nil)
         }
         
         for queuedAsset in clipQueue {
@@ -301,7 +307,7 @@ class ViewController: NSViewController {
         while currentDuration < CMTimeMake(32,1) {
             let clipIndex = Int(random(min: 0, max: CGFloat(clips.count - 1)))
             let clipPath = clips[clipIndex]
-            let clipAsset = AVAsset.assetWithURL(NSURL(fileURLWithPath: clipPath)) as AVAsset
+            let clipAsset = AVAsset.assetWithURL(NSURL(fileURLWithPath: clipPath)) as! AVAsset
             let possibleNewDuration = CMTimeAdd(currentDuration, clipAsset.duration)
             if possibleNewDuration < CMTimeMake(37, 1) { //will not go over 37s
                 clipQueue.append(clipAsset)
