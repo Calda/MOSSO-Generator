@@ -88,18 +88,22 @@ class MSClip {
         let preferred = track.preferredTransform
         let rect = CGRect(origin: CGPointMake(0,0), size: naturalSize)
         let actualSize = CGRectApplyAffineTransform(rect, preferred).size
-        let exportSize = CGSizeMake(720, 480)
+        let exportSize = CGSizeMake(1280, 720)
         if actualSize != exportSize {
             ViewController.Static.needsMultiplePasses = true
-            let fixedWidth : CGFloat = exportSize.width
-            let fixedHeight = (fixedWidth / actualSize.width) * actualSize.height
-            let scaleFactor = (fixedWidth / actualSize.width)
-            let scaleTransform = CGAffineTransformMakeScale(scaleFactor, scaleFactor)
             
-            let yOffset = (exportSize.height - fixedHeight)
-            let letterbox = CGAffineTransformTranslate(scaleTransform, 0, yOffset/2 * (1/scaleFactor))
+            //letterbox width
+            let deltaScale = exportSize.height / actualSize.height
+            let scaleTransform = CGAffineTransformMakeScale(deltaScale, deltaScale)
             
-            layerInstruction.setTransform(letterbox, atTime: kCMTimeZero)
+            let originalAspect = actualSize.width / actualSize.height
+            let newHeight = exportSize.height
+            let newWidth = originalAspect * newHeight
+            let widthDiff = exportSize.width - newWidth
+            let xOffset = widthDiff / 2.0
+            let letterboxX = CGAffineTransformTranslate(scaleTransform, xOffset, 0.0)
+            
+            layerInstruction.setTransform(letterboxX, atTime: kCMTimeZero)
         }
         
         if hideClip {

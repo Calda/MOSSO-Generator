@@ -215,7 +215,9 @@ class ViewController: NSViewController {
             "Applying gaussian blur",
             "Raising dB above -12",
             "Loading Hennessy Memes",
-            "Greetings from March 2015"
+            "Greetings from March 2015",
+            "Carl Stepens Here",
+            "Ayy Lmao"
         ]
         
         for _ in 0...10 { //shuffle
@@ -248,9 +250,9 @@ class ViewController: NSViewController {
         let mainCompositionInst = AVMutableVideoComposition(propertiesOfAsset: mixComposition)
         mainCompositionInst.instructions = [mainInstruction]
         mainCompositionInst.frameDuration = CMTimeMake(1, 30)
-        mainCompositionInst.renderSize = CGSizeMake(640, 480)
+        mainCompositionInst.renderSize = CGSizeMake(1280, 720)
         
-        exporter = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPreset640x480)
+        exporter = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPreset1280x720)
         exporter.outputURL = fileURL
         exporter.videoComposition = mainCompositionInst
         exporter.outputFileType = AVFileTypeQuickTimeMovie

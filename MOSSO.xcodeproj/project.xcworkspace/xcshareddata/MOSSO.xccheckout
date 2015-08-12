@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B97C071D-8A3C-439D-98E6-3B0D58593A46</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MOSSO</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2628CB5CA03574E91C8DFC4F18049CD4DD5860EA</key>
+		<string>https://github.com/calda/MOSSO-Generator.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MOSSO.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2628CB5CA03574E91C8DFC4F18049CD4DD5860EA</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/calda/MOSSO-Generator.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2628CB5CA03574E91C8DFC4F18049CD4DD5860EA</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2628CB5CA03574E91C8DFC4F18049CD4DD5860EA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MOSSO-Generator</string>
+		</dict>
+	</array>
+</dict>
+</plist>
